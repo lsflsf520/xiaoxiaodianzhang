@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>后台管理系统|GTF-Admin</title>
+    <link rel="stylesheet" href="/static/plugins/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/static/core/css/core.css"/>
+</head>
+<body>
+    <!-- 布局容器 -->
+    <div class="layui-layout layui-layout-admin">
+        <!-- 头部 -->
+        <div class="layui-header">
+            <div class="layui-main">
+				<div class="top-left">
+					<!-- logo -->
+					<a href="/" class="logo">GTF-Admin</a>
+					
+					<a href="javascript:;" class="menu-flexible">
+						<i class="layui-icon">&#xe635;</i> 
+					</a>
+				</div>
+                <!-- 头部一级菜单 
+                <ul class="layui-nav top-menu" lay-filter="top-menu">
+                    <li class="layui-nav-item layui-this"><a href="javascript:;">我的面板</a></li>
+                    <li class="layui-nav-item"><a href="javascript:;">系统管理</a></li>
+                    <li class="layui-nav-item"><a href="javascript:;">内容管理</a></li>
+                    <li class="layui-nav-item"><a href="javascript:;">应用管理</a></li>
+                    <li class="layui-nav-item"><a href="javascript:;">会员管理</a></li>
+                </ul>
+                -->
+                <!-- 头部右侧操作 -->
+                <ul class="layui-nav operate">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">进入前台</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">131****5931</a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="javascript:;">个人信息</a>
+                            </dd>
+                            <dd>
+                            	<a href="javascript:;">修改密码</a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;">退出登录</a>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 左侧菜单 -->
+        <div class="layui-side layui-bg-black left-menu-all">
+            	<ul class="layui-nav layui-nav-tree left-menu" lay-filter="left-menu">
+                    <li class="layui-nav-item layui-this">
+                        <a href="javascript:;" data-url="welcome.do" data-id="1">后台首页</a>
+                    </li>
+                 <#if menus??>
+                  <#list menus as d>
+                    <li >
+                      <li class="layui-nav-item">
+                        <a href="javascript:;">${(d.name)!}</a>
+                      <#if d.children?? && d.children?size gt 0>
+                        <dl class="layui-nav-child" style="background-color:#2F4056;">
+                          <#list d.children as c>
+                            <dd>
+                                <a href="javascript:;" data-url="${BASE_URI}${(c.url)!}" data-id="${(c.id)!}">${(c.name)!}</a>
+                            </dd>
+                          </#list>
+                        </dl>
+                      </#if>
+                      </li>
+                    </li>
+                  </#list>
+                </#if>
+                    <!-- <li class="layui-nav-item">
+                        <a href="javascript:;">测试管理</a>
+                        <dl class="layui-nav-child" style="background-color:#2F4056;">
+                            <dd>
+                                <a href="javascript:;" data-url="${BASE_URI}/demo/user/list.do" data-id="2">用户管理</a>
+                            </dd>
+							<dd>
+                                <a href="javascript:;" data-url="login.html" data-id="3">登录页</a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;" data-url="tabletree.html" data-id="4">树表示例</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">测试管理01</a>
+                        <dl class="layui-nav-child" style="background-color:#2F4056;">
+                            <dd>
+                                <a href="javascript:;" data-url="lists.html" data-id="5">测试列表</a>
+                            </dd>
+							<dd>
+                                <a href="javascript:;" data-url="login.html" data-id="6">登录页</a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;" data-url="tabletree.html" data-id="7">树表示例</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">测试管理02</a>
+                        <dl class="layui-nav-child" style="background-color:#2F4056;">
+                            <dd>
+                                <a href="javascript:;" data-url="lists.html" data-id="8">测试列表</a>
+                            </dd>
+							<dd>
+                                <a href="javascript:;" data-url="login.html" data-id="9">登录页</a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;" data-url="tabletree.html" data-id="10">树表示例</a>
+                            </dd>
+                        </dl>
+                    </li> -->
+                </ul>
+        </div>
+		
+        <!-- 主体 -->
+        <div class="layui-body">
+            <!-- 顶部切换卡 -->
+            <div class="layui-tab layui-tab-card" lay-filter="top-tab" lay-allowClose="true">
+                <ul class="layui-tab-title"></ul>
+                <div class="layui-tab-content"></div>
+            </div>
+        </div>
+
+        <!-- 底部 
+        <div class="layui-footer">
+             GTF-Admin
+        </div>-->
+    </div>
+
+    <script type="text/javascript" src="/static/plugins/layui/layui.js"></script>
+    <script type="text/javascript" src="/static/core/js/core.js"></script>
+</body>
+</html>

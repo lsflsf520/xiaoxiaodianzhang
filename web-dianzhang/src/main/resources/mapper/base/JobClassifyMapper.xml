@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengshang.bole.base.dao.JobClassifyDao" >
+  <resultMap id="BaseResultMap" type="com.fengshang.bole.base.entity.JobClassify" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="hangye_id" property="hangyeId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_uptime" property="lastUptime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="BaseColumnList" >
+    id, name, hangye_id, status, create_time, last_uptime
+  </sql>
+  <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="BaseColumnList" />
+    from job_classify
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPK" parameterType="java.lang.Integer" >
+    delete from job_classify
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fengshang.bole.base.entity.JobClassify" >
+    insert into job_classify (id, name, hangye_id, 
+      status, create_time, last_uptime
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{hangyeId,jdbcType=INTEGER}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPK" parameterType="com.fengshang.bole.base.entity.JobClassify" >
+    update job_classify
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="hangyeId != null" >
+        hangye_id = #{hangyeId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUptime != null" >
+        last_uptime = #{lastUptime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertReturnPK" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengshang.bole.base.entity.JobClassify" >
+    insert into job_classify (id, name, hangye_id, 
+      status, create_time, last_uptime
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{hangyeId,jdbcType=INTEGER}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into job_classify
+		(id,name,hangye_id,status,create_time,last_uptime)
+	values 
+	<foreach collection="list" item="item" separator="," index="index">
+		(#{item.id,jdbcType=INTEGER},#{item.name,jdbcType=VARCHAR},#{item.hangyeId,jdbcType=INTEGER},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+	</foreach>
+  </insert>
+  <delete id="batchDel" >
+    		delete from job_classify
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </delete>
+  <update id="updateStatus" >
+    		update job_classify
+			set ${statusColName} = #{delStatusVal, jdbcType=INTEGER}
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </update>
+  <select id="findByPks" resultMap="BaseResultMap" >
+    		select 
+			<include refid="BaseColumnList" />
+			from job_classify
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")"> 
+					#{item,jdbcType=INTEGER}
+				</foreach>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" >
+    select
+		<include refid="BaseColumnList"/>
+	from job_classify
+	<where>
+		<trim suffixOverrides="and" >
+			<if test="id != null and id > 0" >
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="name != null and name != ''" >
+				and name = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="hangyeId != null and hangyeId > 0" >
+				and hangye_id = #{hangyeId,jdbcType=INTEGER}
+			</if>
+			<if test="status != null" >
+				and status = #{status,jdbcType=CHAR}
+			</if>
+			<!--<if test="queryParam != null">
+				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">
+					and create_time between #{queryParam.startDate, jdbcType=VARCHAR} and #{queryParam.endDate, jdbcType=VARCHAR}
+				</if>
+				<if test="queryParam.keyword != null and queryParam.keyword != ''">
+					and (name like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') or other_col like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') )
+				</if>
+			</if>-->
+		</trim>
+	</where>
+  </select>
+</mapper>

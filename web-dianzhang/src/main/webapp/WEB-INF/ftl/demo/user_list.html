@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>车型管理</title>
+    <link href="${BASE_URI!}/static/plugins/layui/css/layui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/core/css/core.css"/>
+    <script src="${BASE_URI!}/static/plugins/layui/layui.js"></script>
+    <!--[if !IE]> -->
+    <script src="${BASE_URI!}/static/plugins/jquery/jquery-2.1.1.min.js"></script>
+    <!-- <![endif]-->
+
+    <!--[if lte IE 8]>
+      <script src="${BASE_URI!}/static/plugins/jquery/jquery-1.11.2.min.js"></script>
+    <![endif]-->
+   
+    <!--[if gt IE 8]>
+      <script src="${BASE_URI!}/static/plugins/jquery/jquery-2.1.1.min.js"></script>
+    <![endif]-->
+    <script src="${BASE_URI!}/static/core/js/util.js?_=${RES_VERSION!}"></script>
+    <#include "../common/macro.html"/>
+</head>
+<body>
+
+<div class="main-wrap">
+
+  <div class="tabbable tabbable-primary" >
+    <form class="layui-form layui-form-pane" action="list.do">
+        <div class="layui-form-item">
+            <label class="layui-form-label">关键字</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" value='${(queryData.queryParam["keyword"])!}' name='queryParam["keyword"]' placeholder="姓名/登录名/手机/邮箱" value="">
+            </div>
+            <input id="pageNum" name="pageInfo.page" value="${(queryData.pageInfo.page)!0}" type="hidden">
+            <button type="submit" id="search" class="layui-btn">查找</button>
+            
+            <button class="layui-btn" type="button" onclick="msgTool.info('今天你还好吗？')">信息提示</button>
+            <button class="layui-btn layui-btn-normal" type="button" onclick="msgTool.success('今天你还好吗？')">成功</button>
+            <button class="layui-btn layui-btn-warm" type="button" onclick="msgTool.warn('今天你还好吗？')">警告</button>
+            <button class="layui-btn layui-btn-danger" type="button" onclick="msgTool.error('今天你还好吗？')">错误</button>
+            <button class="layui-btn layui-btn-primary" type="button" onclick="msgTool.confirm('确定要执行操作吗？', test, '是', '否')">确认框</button>
+        </div>
+    </form>
+
+    <table class="layui-table">
+        <thead>
+        <tr>
+        	<td width="20px;"><input type="checkbox" id="selected-all"></td>
+        	<td>昵称</td>
+            <td>年龄</td>
+            <td>省份</td>
+            <td>城市</td>
+            <td>地区</td>
+            <td>所属公司</td>
+            <td>状态</td>
+            <td>注册时间</td>
+            <td>简介</td>
+            <td width="180px">操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <#list dataPage.datas as d>
+            <tr>
+            	<td>
+            		<input type="checkbox" pk="${d.id!}">
+            	</td>
+            	<td>${d.nick!}</td>
+                <td>
+                    ${d.age!}
+                </td>
+                <td>
+                    ${d.prId!}
+                </td>
+                <td>
+                    ${d.cityId!}
+                </td>
+                <td>
+                    ${d.couId!}
+                </td>
+                <td>
+                    ${d.company!}
+                </td>
+                <td>
+                    ${(d.status.desc)!}
+                </td>
+                <td>
+                    <#if d.createTime??>${(d.createTime!)?string("yyyy-MM-dd HH:mm:ss")}</#if>
+                </td>
+                <td>
+                    ${(d.descp)!}
+                </td>
+                <td>
+                    <button class="layui-btn layui-btn-mini" >重置密码</button>
+                </td>
+            </tr>
+        </#list>
+        </tbody>
+    </table>
+
+    <!-- 公共分页插件 -->
+    <@commonPages size='${(dataPage.totalCount)!}'  pages='${(dataPage.totalPages)!}' pageNum='${(dataPage.currPage)!}' 
+    /> 
+  </div>
+	<!-- main-wrap end -->
+	
+</div>
+
+<script type="text/javascript">
+//closecheckclass = true;
+layui.use('layer', function(){
+  var layer = layui.layer;
+  
+  
+});
+
+function test(index){
+	//do something
+	  msgTool.info("index:" + index);
+	  layer.close(index);
+  }
+</script>
+</body>
+</html>
