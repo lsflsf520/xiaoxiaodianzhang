@@ -1,0 +1,8 @@
+/target/
+/.idea/
+/bin/
+/logs/
+.settings/
+.project
+.classpath
+web-logo.iml
