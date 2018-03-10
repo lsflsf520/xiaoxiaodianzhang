@@ -144,8 +144,8 @@ create table shop_coupon_num(
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100000 DEFAULT CHARSET=utf8 COMMENT='小店当前可用的优惠券数量';
 
-drop table if exists coupon_order;
-create table coupon_order(
+drop table if exists shop_order;
+create table shop_order(
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '订单ID，自增长',
   `shop_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '优惠券所属店铺ID。如果为0，则代表该券可以在wx_uid用户下的所有小店共享，否则只能在该指定的小店有效。',
   `buy_num` int default 0 comment '用户购买的优惠券/立减券剩余数量。默认为0',
@@ -188,7 +188,8 @@ create table cash_log(
   `third_payment_no` varchar(64) comment '使用微信给用户打款成功时的返回的订单号',
   `third_result_code` varchar(32) comment '使用微信给用户账户打款时，微信服务器返回的业务结果码result_code。如果为SYSTEMERROR时，需要用同一个订单号重试，其它时候需要更换订单号',
   `snapshot` varchar(2000) comment '支付成功之后，第三方支付平台返回的所有数据信息，方便后期查阅',
-  `status` enum('REJECT', 'CHECKING', 'PASSED', 'SENT', 'FAIL') not null default 'CHECKING' COMMENT '数据状态。审核不通过、待审核、审核通过、转账成功、转账失败',
+  `check_state` enum('REJECT', 'CHECKING', 'PASSED') not null default 'CHECKING' COMMENT '数据状态。审核不通过、待审核、审核通过、转账成功、转账失败',
+  `cash_state` enum('NOSEND', 'FAILED', 'RECEIVED') not null default 'NOSEND' COMMENT '提现状态。无需发送、转账失败、转账成功',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建时间',
   `last_uptime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最近一次更新时间',
   PRIMARY KEY (`id`)
@@ -248,8 +249,8 @@ create table user_coupon(
 ) ENGINE=InnoDB AUTO_INCREMENT=100000 DEFAULT CHARSET=utf8 COMMENT='用户领取的小店优惠券';
 
 
-drop table if exists user_pay_order;
-create table user_pay_order (
+drop table if exists custom_order;
+create table custom_order (
   `user_coupon_id` int(10) unsigned NOT NULL COMMENT 'user_coupon表的ID',
   `wx_uid` int(10) unsigned NOT NULL COMMENT 'wx_user表的id',
   `ord_fee` decimal(11, 2) comment '本次消费的订单总金额。',

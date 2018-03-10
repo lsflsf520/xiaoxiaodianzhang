@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengshang.xiaodianbao.uc.dao.WxUserDao" >
+  <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.uc.entity.WxUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="head_img" property="headImg" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="union_id" property="unionId" jdbcType="VARCHAR" />
+    <result column="shop_mgr" property="shopMgr" jdbcType="CHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="poster_id" property="posterId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_uptime" property="lastUptime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="BaseColumnList" >
+    id, nick_name, sex, head_img, open_id, union_id, shop_mgr, phone, poster_id, status, 
+    create_time, last_uptime
+  </sql>
+  <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="BaseColumnList" />
+    from wx_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPK" parameterType="java.lang.Integer" >
+    delete from wx_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fengshang.xiaodianbao.uc.entity.WxUser" >
+    insert into wx_user (id, nick_name, sex, 
+      head_img, open_id, union_id, 
+      shop_mgr, phone, poster_id, 
+      status, create_time, last_uptime
+      )
+    values (#{id,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
+      #{headImg,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, 
+      #{shopMgr,jdbcType=CHAR}, #{phone,jdbcType=VARCHAR}, #{posterId,jdbcType=INTEGER}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.uc.entity.WxUser" >
+    update wx_user
+    <set >
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="headImg != null" >
+        head_img = #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="unionId != null" >
+        union_id = #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopMgr != null" >
+        shop_mgr = #{shopMgr,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="posterId != null" >
+        poster_id = #{posterId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUptime != null" >
+        last_uptime = #{lastUptime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertReturnPK" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengshang.xiaodianbao.uc.entity.WxUser" >
+    insert into wx_user (id, nick_name, sex, 
+      head_img, open_id, union_id, 
+      shop_mgr, phone, poster_id, 
+      status, create_time, last_uptime
+      )
+    values (#{id,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
+      #{headImg,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, 
+      #{shopMgr,jdbcType=CHAR}, #{phone,jdbcType=VARCHAR}, #{posterId,jdbcType=INTEGER}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into wx_user
+		(id,nick_name,sex,head_img,open_id,union_id,shop_mgr,phone,poster_id,status,create_time,last_uptime)
+	values 
+	<foreach collection="list" item="item" separator="," index="index">
+		(#{item.id,jdbcType=INTEGER},#{item.nickName,jdbcType=VARCHAR},#{item.sex,jdbcType=CHAR},#{item.headImg,jdbcType=VARCHAR},#{item.openId,jdbcType=VARCHAR},#{item.unionId,jdbcType=VARCHAR},#{item.shopMgr,jdbcType=CHAR},#{item.phone,jdbcType=VARCHAR},#{item.posterId,jdbcType=INTEGER},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+	</foreach>
+  </insert>
+  <delete id="batchDel" >
+    		delete from wx_user
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </delete>
+  <update id="updateStatus" >
+    		update wx_user
+			set ${statusColName} = #{delStatusVal, jdbcType=INTEGER}
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </update>
+  <select id="findByPks" resultMap="BaseResultMap" >
+    		select 
+			<include refid="BaseColumnList" />
+			from wx_user
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")"> 
+					#{item,jdbcType=INTEGER}
+				</foreach>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" >
+    select
+		<include refid="BaseColumnList"/>
+	from wx_user
+	<where>
+		<trim suffixOverrides="and" >
+			<if test="id != null and id > 0" >
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="nickName != null and nickName != ''" >
+				and nick_name = #{nickName,jdbcType=VARCHAR}
+			</if>
+			<if test="sex != null" >
+				and sex = #{sex,jdbcType=CHAR}
+			</if>
+			<if test="headImg != null and headImg != ''" >
+				and head_img = #{headImg,jdbcType=VARCHAR}
+			</if>
+			<if test="openId != null and openId != ''" >
+				and open_id = #{openId,jdbcType=VARCHAR}
+			</if>
+			<if test="unionId != null and unionId != ''" >
+				and union_id = #{unionId,jdbcType=VARCHAR}
+			</if>
+			<if test="shopMgr != null and shopMgr != ''" >
+				and shop_mgr = #{shopMgr,jdbcType=CHAR}
+			</if>
+			<if test="phone != null and phone != ''" >
+				and phone = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="posterId != null and posterId > 0" >
+				and poster_id = #{posterId,jdbcType=INTEGER}
+			</if>
+			<if test="status != null" >
+				and status = #{status,jdbcType=CHAR}
+			</if>
+			<!--<if test="queryParam != null">
+				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">
+					and create_time between #{queryParam.startDate, jdbcType=VARCHAR} and #{queryParam.endDate, jdbcType=VARCHAR}
+				</if>
+				<if test="queryParam.keyword != null and queryParam.keyword != ''">
+					and (name like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') or other_col like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') )
+				</if>
+			</if>-->
+		</trim>
+	</where>
+  </select>
+</mapper>

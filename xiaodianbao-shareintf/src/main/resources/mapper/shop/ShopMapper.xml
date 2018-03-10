@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengshang.xiaodianbao.shop.dao.ShopDao" >
+  <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.shop.entity.Shop" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    <result column="alias" property="alias" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="ind_id" property="indId" jdbcType="INTEGER" />
+    <result column="sub_ind_id" property="subIndId" jdbcType="INTEGER" />
+    <result column="mgr_name" property="mgrName" jdbcType="VARCHAR" />
+    <result column="kefu" property="kefu" jdbcType="VARCHAR" />
+    <result column="licence" property="licence" jdbcType="VARCHAR" />
+    <result column="def_bg_img" property="defBgImg" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
+    <result column="county_id" property="countyId" jdbcType="INTEGER" />
+    <result column="detail_addr" property="detailAddr" jdbcType="VARCHAR" />
+    <result column="lng" property="lng" jdbcType="DECIMAL" />
+    <result column="lat" property="lat" jdbcType="DECIMAL" />
+    <result column="wx_uid" property="wxUid" jdbcType="INTEGER" />
+    <result column="snapshot" property="snapshot" jdbcType="VARCHAR" />
+    <result column="check_state" property="checkState" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_uptime" property="lastUptime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="BaseColumnList" >
+    id, full_name, alias, logo, ind_id, sub_ind_id, mgr_name, kefu, licence, def_bg_img, 
+    province_id, city_id, county_id, detail_addr, lng, lat, wx_uid, snapshot, check_state, 
+    create_time, last_uptime
+  </sql>
+  <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="BaseColumnList" />
+    from shop
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPK" parameterType="java.lang.Integer" >
+    delete from shop
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fengshang.xiaodianbao.shop.entity.Shop" >
+    insert into shop (id, full_name, alias, 
+      logo, ind_id, sub_ind_id, 
+      mgr_name, kefu, licence, 
+      def_bg_img, province_id, city_id, 
+      county_id, detail_addr, lng, 
+      lat, wx_uid, snapshot, 
+      check_state, create_time, last_uptime
+      )
+    values (#{id,jdbcType=INTEGER}, #{fullName,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{indId,jdbcType=INTEGER}, #{subIndId,jdbcType=INTEGER}, 
+      #{mgrName,jdbcType=VARCHAR}, #{kefu,jdbcType=VARCHAR}, #{licence,jdbcType=VARCHAR}, 
+      #{defBgImg,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, 
+      #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, #{lng,jdbcType=DECIMAL}, 
+      #{lat,jdbcType=DECIMAL}, #{wxUid,jdbcType=INTEGER}, #{snapshot,jdbcType=VARCHAR}, 
+      #{checkState,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.shop.entity.Shop" >
+    update shop
+    <set >
+      <if test="fullName != null" >
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null" >
+        alias = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="indId != null" >
+        ind_id = #{indId,jdbcType=INTEGER},
+      </if>
+      <if test="subIndId != null" >
+        sub_ind_id = #{subIndId,jdbcType=INTEGER},
+      </if>
+      <if test="mgrName != null" >
+        mgr_name = #{mgrName,jdbcType=VARCHAR},
+      </if>
+      <if test="kefu != null" >
+        kefu = #{kefu,jdbcType=VARCHAR},
+      </if>
+      <if test="licence != null" >
+        licence = #{licence,jdbcType=VARCHAR},
+      </if>
+      <if test="defBgImg != null" >
+        def_bg_img = #{defBgImg,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="countyId != null" >
+        county_id = #{countyId,jdbcType=INTEGER},
+      </if>
+      <if test="detailAddr != null" >
+        detail_addr = #{detailAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        lng = #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="wxUid != null" >
+        wx_uid = #{wxUid,jdbcType=INTEGER},
+      </if>
+      <if test="snapshot != null" >
+        snapshot = #{snapshot,jdbcType=VARCHAR},
+      </if>
+      <if test="checkState != null" >
+        check_state = #{checkState,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUptime != null" >
+        last_uptime = #{lastUptime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertReturnPK" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengshang.xiaodianbao.shop.entity.Shop" >
+    insert into shop (id, full_name, alias, 
+      logo, ind_id, sub_ind_id, 
+      mgr_name, kefu, licence, 
+      def_bg_img, province_id, city_id, 
+      county_id, detail_addr, lng, 
+      lat, wx_uid, snapshot, 
+      check_state, create_time, last_uptime
+      )
+    values (#{id,jdbcType=INTEGER}, #{fullName,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{indId,jdbcType=INTEGER}, #{subIndId,jdbcType=INTEGER}, 
+      #{mgrName,jdbcType=VARCHAR}, #{kefu,jdbcType=VARCHAR}, #{licence,jdbcType=VARCHAR}, 
+      #{defBgImg,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, 
+      #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, #{lng,jdbcType=DECIMAL}, 
+      #{lat,jdbcType=DECIMAL}, #{wxUid,jdbcType=INTEGER}, #{snapshot,jdbcType=VARCHAR}, 
+      #{checkState,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into shop
+		(id,full_name,alias,logo,ind_id,sub_ind_id,mgr_name,kefu,licence,def_bg_img,province_id,city_id,county_id,detail_addr,lng,lat,wx_uid,snapshot,check_state,create_time,last_uptime)
+	values 
+	<foreach collection="list" item="item" separator="," index="index">
+		(#{item.id,jdbcType=INTEGER},#{item.fullName,jdbcType=VARCHAR},#{item.alias,jdbcType=VARCHAR},#{item.logo,jdbcType=VARCHAR},#{item.indId,jdbcType=INTEGER},#{item.subIndId,jdbcType=INTEGER},#{item.mgrName,jdbcType=VARCHAR},#{item.kefu,jdbcType=VARCHAR},#{item.licence,jdbcType=VARCHAR},#{item.defBgImg,jdbcType=VARCHAR},#{item.provinceId,jdbcType=INTEGER},#{item.cityId,jdbcType=INTEGER},#{item.countyId,jdbcType=INTEGER},#{item.detailAddr,jdbcType=VARCHAR},#{item.lng,jdbcType=DECIMAL},#{item.lat,jdbcType=DECIMAL},#{item.wxUid,jdbcType=INTEGER},#{item.snapshot,jdbcType=VARCHAR},#{item.checkState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+	</foreach>
+  </insert>
+  <delete id="batchDel" >
+    		delete from shop
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </delete>
+  <update id="updateStatus" >
+    		update shop
+			set ${statusColName} = #{delStatusVal, jdbcType=INTEGER}
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </update>
+  <select id="findByPks" resultMap="BaseResultMap" >
+    		select 
+			<include refid="BaseColumnList" />
+			from shop
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")"> 
+					#{item,jdbcType=INTEGER}
+				</foreach>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" >
+    select
+		<include refid="BaseColumnList"/>
+	from shop
+	<where>
+		<trim suffixOverrides="and" >
+			<if test="id != null and id > 0" >
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="fullName != null and fullName != ''" >
+				and full_name = #{fullName,jdbcType=VARCHAR}
+			</if>
+			<if test="alias != null and alias != ''" >
+				and alias = #{alias,jdbcType=VARCHAR}
+			</if>
+			<if test="logo != null and logo != ''" >
+				and logo = #{logo,jdbcType=VARCHAR}
+			</if>
+			<if test="indId != null and indId > 0" >
+				and ind_id = #{indId,jdbcType=INTEGER}
+			</if>
+			<if test="subIndId != null and subIndId > 0" >
+				and sub_ind_id = #{subIndId,jdbcType=INTEGER}
+			</if>
+			<if test="mgrName != null and mgrName != ''" >
+				and mgr_name = #{mgrName,jdbcType=VARCHAR}
+			</if>
+			<if test="kefu != null and kefu != ''" >
+				and kefu = #{kefu,jdbcType=VARCHAR}
+			</if>
+			<if test="licence != null and licence != ''" >
+				and licence = #{licence,jdbcType=VARCHAR}
+			</if>
+			<if test="defBgImg != null and defBgImg != ''" >
+				and def_bg_img = #{defBgImg,jdbcType=VARCHAR}
+			</if>
+			<if test="provinceId != null and provinceId > 0" >
+				and province_id = #{provinceId,jdbcType=INTEGER}
+			</if>
+			<if test="cityId != null and cityId > 0" >
+				and city_id = #{cityId,jdbcType=INTEGER}
+			</if>
+			<if test="countyId != null and countyId > 0" >
+				and county_id = #{countyId,jdbcType=INTEGER}
+			</if>
+			<if test="detailAddr != null and detailAddr != ''" >
+				and detail_addr = #{detailAddr,jdbcType=VARCHAR}
+			</if>
+			<if test="lng != null" >
+				and lng = #{lng,jdbcType=DECIMAL}
+			</if>
+			<if test="lat != null" >
+				and lat = #{lat,jdbcType=DECIMAL}
+			</if>
+			<if test="wxUid != null and wxUid > 0" >
+				and wx_uid = #{wxUid,jdbcType=INTEGER}
+			</if>
+			<if test="snapshot != null and snapshot != ''" >
+				and snapshot = #{snapshot,jdbcType=VARCHAR}
+			</if>
+			<if test="checkState != null" >
+				and check_state = #{checkState,jdbcType=CHAR}
+			</if>
+			<!--<if test="queryParam != null">
+				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">
+					and create_time between #{queryParam.startDate, jdbcType=VARCHAR} and #{queryParam.endDate, jdbcType=VARCHAR}
+				</if>
+				<if test="queryParam.keyword != null and queryParam.keyword != ''">
+					and (name like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') or other_col like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') )
+				</if>
+			</if>-->
+		</trim>
+	</where>
+  </select>
+</mapper>

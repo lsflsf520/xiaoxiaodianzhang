@@ -1,10 +1,10 @@
-package com.fengshang.xiaodianbao.data;
+package com.fengshang.xiaodianbao.shop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("data")
-public class DataController {
+@RequestMapping("coupon")
+public class ShopCouponController {
 
 }

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengshang.xiaodianbao.wallet.dao.WalletDao" >
+  <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.wallet.entity.Wallet" >
+    <id column="wx_uid" property="wxUid" jdbcType="INTEGER" />
+    <result column="balance" property="balance" jdbcType="DECIMAL" />
+    <result column="total_charge_amount" property="totalChargeAmount" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_uptime" property="lastUptime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="BaseColumnList" >
+    wx_uid, balance, total_charge_amount, status, create_time, last_uptime
+  </sql>
+  <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="BaseColumnList" />
+    from wallet
+    where wx_uid = #{wxUid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPK" parameterType="java.lang.Integer" >
+    delete from wallet
+    where wx_uid = #{wxUid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fengshang.xiaodianbao.wallet.entity.Wallet" >
+    insert into wallet (wx_uid, balance, total_charge_amount, 
+      status, create_time, last_uptime
+      )
+    values (#{wxUid,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL}, #{totalChargeAmount,jdbcType=DECIMAL}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.wallet.entity.Wallet" >
+    update wallet
+    <set >
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="totalChargeAmount != null" >
+        total_charge_amount = #{totalChargeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUptime != null" >
+        last_uptime = #{lastUptime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where wx_uid = #{wxUid,jdbcType=INTEGER}
+  </update>
+  <insert id="insertReturnPK" useGeneratedKeys="true" keyProperty="wxUid" parameterType="com.fengshang.xiaodianbao.wallet.entity.Wallet" >
+    insert into wallet (wx_uid, balance, total_charge_amount, 
+      status, create_time, last_uptime
+      )
+    values (#{wxUid,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL}, #{totalChargeAmount,jdbcType=DECIMAL}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into wallet
+		(wx_uid,balance,total_charge_amount,status,create_time,last_uptime)
+	values 
+	<foreach collection="list" item="item" separator="," index="index">
+		(#{item.wxUid,jdbcType=INTEGER},#{item.balance,jdbcType=DECIMAL},#{item.totalChargeAmount,jdbcType=DECIMAL},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+	</foreach>
+  </insert>
+  <delete id="batchDel" >
+    		delete from wallet
+			where wx_uid in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </delete>
+  <update id="updateStatus" >
+    		update wallet
+			set ${statusColName} = #{delStatusVal, jdbcType=INTEGER}
+			where wx_uid in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </update>
+  <select id="findByPks" resultMap="BaseResultMap" >
+    		select 
+			<include refid="BaseColumnList" />
+			from wallet
+			where wx_uid in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")"> 
+					#{item,jdbcType=INTEGER}
+				</foreach>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" >
+    select
+		<include refid="BaseColumnList"/>
+	from wallet
+	<where>
+		<trim suffixOverrides="and" >
+			<if test="wxUid != null and wxUid > 0" >
+				and wx_uid = #{wxUid,jdbcType=INTEGER}
+			</if>
+			<if test="balance != null" >
+				and balance = #{balance,jdbcType=DECIMAL}
+			</if>
+			<if test="totalChargeAmount != null" >
+				and total_charge_amount = #{totalChargeAmount,jdbcType=DECIMAL}
+			</if>
+			<if test="status != null" >
+				and status = #{status,jdbcType=CHAR}
+			</if>
+			<!--<if test="queryParam != null">
+				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">
+					and create_time between #{queryParam.startDate, jdbcType=VARCHAR} and #{queryParam.endDate, jdbcType=VARCHAR}
+				</if>
+				<if test="queryParam.keyword != null and queryParam.keyword != ''">
+					and (name like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') or other_col like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') )
+				</if>
+			</if>-->
+		</trim>
+	</where>
+  </select>
+</mapper>

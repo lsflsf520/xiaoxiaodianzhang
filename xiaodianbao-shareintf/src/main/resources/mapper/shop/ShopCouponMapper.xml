@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengshang.xiaodianbao.shop.dao.ShopCouponDao" >
+  <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.shop.entity.ShopCoupon" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="wx_uid" property="wxUid" jdbcType="INTEGER" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="coupon_type" property="couponType" jdbcType="CHAR" />
+    <result column="tmpl_file_name" property="tmplFileName" jdbcType="VARCHAR" />
+    <result column="discount_type" property="discountType" jdbcType="CHAR" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="min_amount" property="minAmount" jdbcType="DECIMAL" />
+    <result column="day_limit_num" property="dayLimitNum" jdbcType="INTEGER" />
+    <result column="person_limit_num" property="personLimitNum" jdbcType="INTEGER" />
+    <result column="effect_day" property="effectDay" jdbcType="INTEGER" />
+    <result column="online_pay" property="onlinePay" jdbcType="CHAR" />
+    <result column="effect_after_recv_day" property="effectAfterRecvDay" jdbcType="INTEGER" />
+    <result column="can_use_time" property="canUseTime" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_uptime" property="lastUptime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="BaseColumnList" >
+    id, wx_uid, shop_id, coupon_type, tmpl_file_name, discount_type, discount, min_amount, 
+    day_limit_num, person_limit_num, effect_day, online_pay, effect_after_recv_day, can_use_time, 
+    remark, status, create_time, last_uptime
+  </sql>
+  <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="BaseColumnList" />
+    from shop_coupon
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPK" parameterType="java.lang.Integer" >
+    delete from shop_coupon
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fengshang.xiaodianbao.shop.entity.ShopCoupon" >
+    insert into shop_coupon (id, wx_uid, shop_id, 
+      coupon_type, tmpl_file_name, discount_type, 
+      discount, min_amount, day_limit_num, 
+      person_limit_num, effect_day, online_pay, 
+      effect_after_recv_day, can_use_time, remark, 
+      status, create_time, last_uptime
+      )
+    values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
+      #{couponType,jdbcType=CHAR}, #{tmplFileName,jdbcType=VARCHAR}, #{discountType,jdbcType=CHAR}, 
+      #{discount,jdbcType=DECIMAL}, #{minAmount,jdbcType=DECIMAL}, #{dayLimitNum,jdbcType=INTEGER}, 
+      #{personLimitNum,jdbcType=INTEGER}, #{effectDay,jdbcType=INTEGER}, #{onlinePay,jdbcType=CHAR}, 
+      #{effectAfterRecvDay,jdbcType=INTEGER}, #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.shop.entity.ShopCoupon" >
+    update shop_coupon
+    <set >
+      <if test="wxUid != null" >
+        wx_uid = #{wxUid,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="couponType != null" >
+        coupon_type = #{couponType,jdbcType=CHAR},
+      </if>
+      <if test="tmplFileName != null" >
+        tmpl_file_name = #{tmplFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="discountType != null" >
+        discount_type = #{discountType,jdbcType=CHAR},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="minAmount != null" >
+        min_amount = #{minAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="dayLimitNum != null" >
+        day_limit_num = #{dayLimitNum,jdbcType=INTEGER},
+      </if>
+      <if test="personLimitNum != null" >
+        person_limit_num = #{personLimitNum,jdbcType=INTEGER},
+      </if>
+      <if test="effectDay != null" >
+        effect_day = #{effectDay,jdbcType=INTEGER},
+      </if>
+      <if test="onlinePay != null" >
+        online_pay = #{onlinePay,jdbcType=CHAR},
+      </if>
+      <if test="effectAfterRecvDay != null" >
+        effect_after_recv_day = #{effectAfterRecvDay,jdbcType=INTEGER},
+      </if>
+      <if test="canUseTime != null" >
+        can_use_time = #{canUseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUptime != null" >
+        last_uptime = #{lastUptime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertReturnPK" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengshang.xiaodianbao.shop.entity.ShopCoupon" >
+    insert into shop_coupon (id, wx_uid, shop_id, 
+      coupon_type, tmpl_file_name, discount_type, 
+      discount, min_amount, day_limit_num, 
+      person_limit_num, effect_day, online_pay, 
+      effect_after_recv_day, can_use_time, remark, 
+      status, create_time, last_uptime
+      )
+    values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
+      #{couponType,jdbcType=CHAR}, #{tmplFileName,jdbcType=VARCHAR}, #{discountType,jdbcType=CHAR}, 
+      #{discount,jdbcType=DECIMAL}, #{minAmount,jdbcType=DECIMAL}, #{dayLimitNum,jdbcType=INTEGER}, 
+      #{personLimitNum,jdbcType=INTEGER}, #{effectDay,jdbcType=INTEGER}, #{onlinePay,jdbcType=CHAR}, 
+      #{effectAfterRecvDay,jdbcType=INTEGER}, #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into shop_coupon
+		(id,wx_uid,shop_id,coupon_type,tmpl_file_name,discount_type,discount,min_amount,day_limit_num,person_limit_num,effect_day,online_pay,effect_after_recv_day,can_use_time,remark,status,create_time,last_uptime)
+	values 
+	<foreach collection="list" item="item" separator="," index="index">
+		(#{item.id,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.shopId,jdbcType=INTEGER},#{item.couponType,jdbcType=CHAR},#{item.tmplFileName,jdbcType=VARCHAR},#{item.discountType,jdbcType=CHAR},#{item.discount,jdbcType=DECIMAL},#{item.minAmount,jdbcType=DECIMAL},#{item.dayLimitNum,jdbcType=INTEGER},#{item.personLimitNum,jdbcType=INTEGER},#{item.effectDay,jdbcType=INTEGER},#{item.onlinePay,jdbcType=CHAR},#{item.effectAfterRecvDay,jdbcType=INTEGER},#{item.canUseTime,jdbcType=VARCHAR},#{item.remark,jdbcType=VARCHAR},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+	</foreach>
+  </insert>
+  <delete id="batchDel" >
+    		delete from shop_coupon
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </delete>
+  <update id="updateStatus" >
+    		update shop_coupon
+			set ${statusColName} = #{delStatusVal, jdbcType=INTEGER}
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </update>
+  <select id="findByPks" resultMap="BaseResultMap" >
+    		select 
+			<include refid="BaseColumnList" />
+			from shop_coupon
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")"> 
+					#{item,jdbcType=INTEGER}
+				</foreach>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" >
+    select
+		<include refid="BaseColumnList"/>
+	from shop_coupon
+	<where>
+		<trim suffixOverrides="and" >
+			<if test="id != null and id > 0" >
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="wxUid != null and wxUid > 0" >
+				and wx_uid = #{wxUid,jdbcType=INTEGER}
+			</if>
+			<if test="shopId != null and shopId > 0" >
+				and shop_id = #{shopId,jdbcType=INTEGER}
+			</if>
+			<if test="couponType != null and couponType != ''" >
+				and coupon_type = #{couponType,jdbcType=CHAR}
+			</if>
+			<if test="tmplFileName != null and tmplFileName != ''" >
+				and tmpl_file_name = #{tmplFileName,jdbcType=VARCHAR}
+			</if>
+			<if test="discountType != null and discountType != ''" >
+				and discount_type = #{discountType,jdbcType=CHAR}
+			</if>
+			<if test="discount != null" >
+				and discount = #{discount,jdbcType=DECIMAL}
+			</if>
+			<if test="minAmount != null" >
+				and min_amount = #{minAmount,jdbcType=DECIMAL}
+			</if>
+			<if test="dayLimitNum != null and dayLimitNum > 0" >
+				and day_limit_num = #{dayLimitNum,jdbcType=INTEGER}
+			</if>
+			<if test="personLimitNum != null and personLimitNum > 0" >
+				and person_limit_num = #{personLimitNum,jdbcType=INTEGER}
+			</if>
+			<if test="effectDay != null and effectDay > 0" >
+				and effect_day = #{effectDay,jdbcType=INTEGER}
+			</if>
+			<if test="onlinePay != null and onlinePay != ''" >
+				and online_pay = #{onlinePay,jdbcType=CHAR}
+			</if>
+			<if test="effectAfterRecvDay != null and effectAfterRecvDay > 0" >
+				and effect_after_recv_day = #{effectAfterRecvDay,jdbcType=INTEGER}
+			</if>
+			<if test="canUseTime != null and canUseTime != ''" >
+				and can_use_time = #{canUseTime,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null" >
+				and status = #{status,jdbcType=CHAR}
+			</if>
+			<!--<if test="queryParam != null">
+				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">
+					and create_time between #{queryParam.startDate, jdbcType=VARCHAR} and #{queryParam.endDate, jdbcType=VARCHAR}
+				</if>
+				<if test="queryParam.keyword != null and queryParam.keyword != ''">
+					and (name like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') or other_col like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') )
+				</if>
+			</if>-->
+		</trim>
+	</where>
+  </select>
+</mapper>

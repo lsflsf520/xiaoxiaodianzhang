@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengshang.xiaodianbao.uc.dao.WxUserExtraDao" >
+  <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.uc.entity.WxUserExtra" >
+    <id column="wx_uid" property="wxUid" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county_id" property="countyId" jdbcType="INTEGER" />
+    <result column="detail_addr" property="detailAddr" jdbcType="VARCHAR" />
+    <result column="lng" property="lng" jdbcType="DECIMAL" />
+    <result column="lat" property="lat" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_uptime" property="lastUptime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="BaseColumnList" >
+    wx_uid, country, province, city, county_id, detail_addr, lng, lat, create_time, last_uptime
+  </sql>
+  <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="BaseColumnList" />
+    from wx_user_extra
+    where wx_uid = #{wxUid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPK" parameterType="java.lang.Integer" >
+    delete from wx_user_extra
+    where wx_uid = #{wxUid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fengshang.xiaodianbao.uc.entity.WxUserExtra" >
+    insert into wx_user_extra (wx_uid, country, province, 
+      city, county_id, detail_addr, 
+      lng, lat, create_time, 
+      last_uptime)
+    values (#{wxUid,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, 
+      #{lng,jdbcType=DECIMAL}, #{lat,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUptime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.uc.entity.WxUserExtra" >
+    update wx_user_extra
+    <set >
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="countyId != null" >
+        county_id = #{countyId,jdbcType=INTEGER},
+      </if>
+      <if test="detailAddr != null" >
+        detail_addr = #{detailAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        lng = #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUptime != null" >
+        last_uptime = #{lastUptime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where wx_uid = #{wxUid,jdbcType=INTEGER}
+  </update>
+  <insert id="insertReturnPK" useGeneratedKeys="true" keyProperty="wxUid" parameterType="com.fengshang.xiaodianbao.uc.entity.WxUserExtra" >
+    insert into wx_user_extra (wx_uid, country, province, 
+      city, county_id, detail_addr, 
+      lng, lat, create_time, 
+      last_uptime)
+    values (#{wxUid,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, 
+      #{lng,jdbcType=DECIMAL}, #{lat,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUptime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into wx_user_extra
+		(wx_uid,country,province,city,county_id,detail_addr,lng,lat,create_time,last_uptime)
+	values 
+	<foreach collection="list" item="item" separator="," index="index">
+		(#{item.wxUid,jdbcType=INTEGER},#{item.country,jdbcType=VARCHAR},#{item.province,jdbcType=VARCHAR},#{item.city,jdbcType=VARCHAR},#{item.countyId,jdbcType=INTEGER},#{item.detailAddr,jdbcType=VARCHAR},#{item.lng,jdbcType=DECIMAL},#{item.lat,jdbcType=DECIMAL},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+	</foreach>
+  </insert>
+  <delete id="batchDel" >
+    		delete from wx_user_extra
+			where wx_uid in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </delete>
+  <update id="updateStatus" >
+    		update wx_user_extra
+			set ${statusColName} = #{delStatusVal, jdbcType=INTEGER}
+			where wx_uid in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </update>
+  <select id="findByPks" resultMap="BaseResultMap" >
+    		select 
+			<include refid="BaseColumnList" />
+			from wx_user_extra
+			where wx_uid in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")"> 
+					#{item,jdbcType=INTEGER}
+				</foreach>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" >
+    select
+		<include refid="BaseColumnList"/>
+	from wx_user_extra
+	<where>
+		<trim suffixOverrides="and" >
+			<if test="wxUid != null and wxUid > 0" >
+				and wx_uid = #{wxUid,jdbcType=INTEGER}
+			</if>
+			<if test="country != null and country != ''" >
+				and country = #{country,jdbcType=VARCHAR}
+			</if>
+			<if test="province != null and province != ''" >
+				and province = #{province,jdbcType=VARCHAR}
+			</if>
+			<if test="city != null and city != ''" >
+				and city = #{city,jdbcType=VARCHAR}
+			</if>
+			<if test="countyId != null and countyId > 0" >
+				and county_id = #{countyId,jdbcType=INTEGER}
+			</if>
+			<if test="detailAddr != null and detailAddr != ''" >
+				and detail_addr = #{detailAddr,jdbcType=VARCHAR}
+			</if>
+			<if test="lng != null" >
+				and lng = #{lng,jdbcType=DECIMAL}
+			</if>
+			<if test="lat != null" >
+				and lat = #{lat,jdbcType=DECIMAL}
+			</if>
+			<!--<if test="queryParam != null">
+				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">
+					and create_time between #{queryParam.startDate, jdbcType=VARCHAR} and #{queryParam.endDate, jdbcType=VARCHAR}
+				</if>
+				<if test="queryParam.keyword != null and queryParam.keyword != ''">
+					and (name like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') or other_col like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') )
+				</if>
+			</if>-->
+		</trim>
+	</where>
+  </select>
+</mapper>

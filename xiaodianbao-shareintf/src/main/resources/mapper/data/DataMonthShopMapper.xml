@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengshang.xiaodianbao.data.dao.DataMonthShopDao" >
+  <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.data.entity.DataMonthShop" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="data_day" property="dataDay" jdbcType="DATE" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="coupon_type" property="couponType" jdbcType="CHAR" />
+    <result column="recved_num" property="recvedNum" jdbcType="INTEGER" />
+    <result column="used_num" property="usedNum" jdbcType="INTEGER" />
+    <result column="new_user_num" property="newUserNum" jdbcType="INTEGER" />
+    <result column="old_user_num" property="oldUserNum" jdbcType="INTEGER" />
+    <result column="order_fee" property="orderFee" jdbcType="DOUBLE" />
+    <result column="coupon_fee" property="couponFee" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="BaseColumnList" >
+    id, data_day, shop_id, coupon_type, recved_num, used_num, new_user_num, old_user_num, 
+    order_fee, coupon_fee, create_time
+  </sql>
+  <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="BaseColumnList" />
+    from data_month_shop
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPK" parameterType="java.lang.Integer" >
+    delete from data_month_shop
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fengshang.xiaodianbao.data.entity.DataMonthShop" >
+    insert into data_month_shop (id, data_day, shop_id, 
+      coupon_type, recved_num, used_num, 
+      new_user_num, old_user_num, order_fee, 
+      coupon_fee, create_time)
+    values (#{id,jdbcType=INTEGER}, #{dataDay,jdbcType=DATE}, #{shopId,jdbcType=INTEGER}, 
+      #{couponType,jdbcType=CHAR}, #{recvedNum,jdbcType=INTEGER}, #{usedNum,jdbcType=INTEGER}, 
+      #{newUserNum,jdbcType=INTEGER}, #{oldUserNum,jdbcType=INTEGER}, #{orderFee,jdbcType=DOUBLE}, 
+      #{couponFee,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.data.entity.DataMonthShop" >
+    update data_month_shop
+    <set >
+      <if test="dataDay != null" >
+        data_day = #{dataDay,jdbcType=DATE},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="couponType != null" >
+        coupon_type = #{couponType,jdbcType=CHAR},
+      </if>
+      <if test="recvedNum != null" >
+        recved_num = #{recvedNum,jdbcType=INTEGER},
+      </if>
+      <if test="usedNum != null" >
+        used_num = #{usedNum,jdbcType=INTEGER},
+      </if>
+      <if test="newUserNum != null" >
+        new_user_num = #{newUserNum,jdbcType=INTEGER},
+      </if>
+      <if test="oldUserNum != null" >
+        old_user_num = #{oldUserNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderFee != null" >
+        order_fee = #{orderFee,jdbcType=DOUBLE},
+      </if>
+      <if test="couponFee != null" >
+        coupon_fee = #{couponFee,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertReturnPK" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengshang.xiaodianbao.data.entity.DataMonthShop" >
+    insert into data_month_shop (id, data_day, shop_id, 
+      coupon_type, recved_num, used_num, 
+      new_user_num, old_user_num, order_fee, 
+      coupon_fee, create_time)
+    values (#{id,jdbcType=INTEGER}, #{dataDay,jdbcType=DATE}, #{shopId,jdbcType=INTEGER}, 
+      #{couponType,jdbcType=CHAR}, #{recvedNum,jdbcType=INTEGER}, #{usedNum,jdbcType=INTEGER}, 
+      #{newUserNum,jdbcType=INTEGER}, #{oldUserNum,jdbcType=INTEGER}, #{orderFee,jdbcType=DOUBLE}, 
+      #{couponFee,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into data_month_shop
+		(id,data_day,shop_id,coupon_type,recved_num,used_num,new_user_num,old_user_num,order_fee,coupon_fee,create_time)
+	values 
+	<foreach collection="list" item="item" separator="," index="index">
+		(#{item.id,jdbcType=INTEGER},#{item.dataDay,jdbcType=DATE},#{item.shopId,jdbcType=INTEGER},#{item.couponType,jdbcType=CHAR},#{item.recvedNum,jdbcType=INTEGER},#{item.usedNum,jdbcType=INTEGER},#{item.newUserNum,jdbcType=INTEGER},#{item.oldUserNum,jdbcType=INTEGER},#{item.orderFee,jdbcType=DOUBLE},#{item.couponFee,jdbcType=DOUBLE},#{item.createTime,jdbcType=TIMESTAMP})
+	</foreach>
+  </insert>
+  <delete id="batchDel" >
+    		delete from data_month_shop
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </delete>
+  <update id="updateStatus" >
+    		update data_month_shop
+			set ${statusColName} = #{delStatusVal, jdbcType=INTEGER}
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </update>
+  <select id="findByPks" resultMap="BaseResultMap" >
+    		select 
+			<include refid="BaseColumnList" />
+			from data_month_shop
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")"> 
+					#{item,jdbcType=INTEGER}
+				</foreach>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" >
+    select
+		<include refid="BaseColumnList"/>
+	from data_month_shop
+	<where>
+		<trim suffixOverrides="and" >
+			<if test="id != null and id > 0" >
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="shopId != null and shopId > 0" >
+				and shop_id = #{shopId,jdbcType=INTEGER}
+			</if>
+			<if test="couponType != null" >
+				and coupon_type = #{couponType,jdbcType=CHAR}
+			</if>
+			<if test="recvedNum != null and recvedNum > 0" >
+				and recved_num = #{recvedNum,jdbcType=INTEGER}
+			</if>
+			<if test="usedNum != null and usedNum > 0" >
+				and used_num = #{usedNum,jdbcType=INTEGER}
+			</if>
+			<if test="newUserNum != null and newUserNum > 0" >
+				and new_user_num = #{newUserNum,jdbcType=INTEGER}
+			</if>
+			<if test="oldUserNum != null and oldUserNum > 0" >
+				and old_user_num = #{oldUserNum,jdbcType=INTEGER}
+			</if>
+			<!--<if test="queryParam != null">
+				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">
+					and create_time between #{queryParam.startDate, jdbcType=VARCHAR} and #{queryParam.endDate, jdbcType=VARCHAR}
+				</if>
+				<if test="queryParam.keyword != null and queryParam.keyword != ''">
+					and (name like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') or other_col like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') )
+				</if>
+			</if>-->
+		</trim>
+	</where>
+  </select>
+</mapper>

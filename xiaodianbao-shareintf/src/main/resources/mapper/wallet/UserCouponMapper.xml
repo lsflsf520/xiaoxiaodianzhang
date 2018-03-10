@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengshang.xiaodianbao.wallet.dao.UserCouponDao" >
+  <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.wallet.entity.UserCoupon" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="wx_uid" property="wxUid" jdbcType="INTEGER" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="src_code" property="srcCode" jdbcType="VARCHAR" />
+    <result column="coupon_type" property="couponType" jdbcType="CHAR" />
+    <result column="tmpl_file_name" property="tmplFileName" jdbcType="VARCHAR" />
+    <result column="discount_type" property="discountType" jdbcType="CHAR" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="min_amount" property="minAmount" jdbcType="DECIMAL" />
+    <result column="online_pay" property="onlinePay" jdbcType="CHAR" />
+    <result column="uneffect_time" property="uneffectTime" jdbcType="TIMESTAMP" />
+    <result column="effect_time" property="effectTime" jdbcType="TIMESTAMP" />
+    <result column="can_use_time" property="canUseTime" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="coupon_state" property="couponState" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_uptime" property="lastUptime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="BaseColumnList" >
+    id, wx_uid, shop_id, src_code, coupon_type, tmpl_file_name, discount_type, discount, 
+    min_amount, online_pay, uneffect_time, effect_time, can_use_time, remark, coupon_state, 
+    create_time, last_uptime
+  </sql>
+  <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="BaseColumnList" />
+    from user_coupon
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPK" parameterType="java.lang.Integer" >
+    delete from user_coupon
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fengshang.xiaodianbao.wallet.entity.UserCoupon" >
+    insert into user_coupon (id, wx_uid, shop_id, 
+      src_code, coupon_type, tmpl_file_name, 
+      discount_type, discount, min_amount, 
+      online_pay, uneffect_time, effect_time, 
+      can_use_time, remark, coupon_state, 
+      create_time, last_uptime)
+    values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
+      #{srcCode,jdbcType=VARCHAR}, #{couponType,jdbcType=CHAR}, #{tmplFileName,jdbcType=VARCHAR}, 
+      #{discountType,jdbcType=CHAR}, #{discount,jdbcType=DECIMAL}, #{minAmount,jdbcType=DECIMAL}, 
+      #{onlinePay,jdbcType=CHAR}, #{uneffectTime,jdbcType=TIMESTAMP}, #{effectTime,jdbcType=TIMESTAMP}, 
+      #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{couponState,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.wallet.entity.UserCoupon" >
+    update user_coupon
+    <set >
+      <if test="wxUid != null" >
+        wx_uid = #{wxUid,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="srcCode != null" >
+        src_code = #{srcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null" >
+        coupon_type = #{couponType,jdbcType=CHAR},
+      </if>
+      <if test="tmplFileName != null" >
+        tmpl_file_name = #{tmplFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="discountType != null" >
+        discount_type = #{discountType,jdbcType=CHAR},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="minAmount != null" >
+        min_amount = #{minAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="onlinePay != null" >
+        online_pay = #{onlinePay,jdbcType=CHAR},
+      </if>
+      <if test="uneffectTime != null" >
+        uneffect_time = #{uneffectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectTime != null" >
+        effect_time = #{effectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="canUseTime != null" >
+        can_use_time = #{canUseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="couponState != null" >
+        coupon_state = #{couponState,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUptime != null" >
+        last_uptime = #{lastUptime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertReturnPK" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengshang.xiaodianbao.wallet.entity.UserCoupon" >
+    insert into user_coupon (id, wx_uid, shop_id, 
+      src_code, coupon_type, tmpl_file_name, 
+      discount_type, discount, min_amount, 
+      online_pay, uneffect_time, effect_time, 
+      can_use_time, remark, coupon_state, 
+      create_time, last_uptime)
+    values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
+      #{srcCode,jdbcType=VARCHAR}, #{couponType,jdbcType=CHAR}, #{tmplFileName,jdbcType=VARCHAR}, 
+      #{discountType,jdbcType=CHAR}, #{discount,jdbcType=DECIMAL}, #{minAmount,jdbcType=DECIMAL}, 
+      #{onlinePay,jdbcType=CHAR}, #{uneffectTime,jdbcType=TIMESTAMP}, #{effectTime,jdbcType=TIMESTAMP}, 
+      #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{couponState,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into user_coupon
+		(id,wx_uid,shop_id,src_code,coupon_type,tmpl_file_name,discount_type,discount,min_amount,online_pay,uneffect_time,effect_time,can_use_time,remark,coupon_state,create_time,last_uptime)
+	values 
+	<foreach collection="list" item="item" separator="," index="index">
+		(#{item.id,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.shopId,jdbcType=INTEGER},#{item.srcCode,jdbcType=VARCHAR},#{item.couponType,jdbcType=CHAR},#{item.tmplFileName,jdbcType=VARCHAR},#{item.discountType,jdbcType=CHAR},#{item.discount,jdbcType=DECIMAL},#{item.minAmount,jdbcType=DECIMAL},#{item.onlinePay,jdbcType=CHAR},#{item.uneffectTime,jdbcType=TIMESTAMP},#{item.effectTime,jdbcType=TIMESTAMP},#{item.canUseTime,jdbcType=VARCHAR},#{item.remark,jdbcType=VARCHAR},#{item.couponState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+	</foreach>
+  </insert>
+  <delete id="batchDel" >
+    		delete from user_coupon
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </delete>
+  <update id="updateStatus" >
+    		update user_coupon
+			set ${statusColName} = #{delStatusVal, jdbcType=INTEGER}
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </update>
+  <select id="findByPks" resultMap="BaseResultMap" >
+    		select 
+			<include refid="BaseColumnList" />
+			from user_coupon
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")"> 
+					#{item,jdbcType=INTEGER}
+				</foreach>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" >
+    select
+		<include refid="BaseColumnList"/>
+	from user_coupon
+	<where>
+		<trim suffixOverrides="and" >
+			<if test="id != null and id > 0" >
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="wxUid != null and wxUid > 0" >
+				and wx_uid = #{wxUid,jdbcType=INTEGER}
+			</if>
+			<if test="shopId != null and shopId > 0" >
+				and shop_id = #{shopId,jdbcType=INTEGER}
+			</if>
+			<if test="srcCode != null and srcCode != ''" >
+				and src_code = #{srcCode,jdbcType=VARCHAR}
+			</if>
+			<if test="couponType != null" >
+				and coupon_type = #{couponType,jdbcType=CHAR}
+			</if>
+			<if test="tmplFileName != null and tmplFileName != ''" >
+				and tmpl_file_name = #{tmplFileName,jdbcType=VARCHAR}
+			</if>
+			<if test="discountType != null" >
+				and discount_type = #{discountType,jdbcType=CHAR}
+			</if>
+			<if test="discount != null" >
+				and discount = #{discount,jdbcType=DECIMAL}
+			</if>
+			<if test="minAmount != null" >
+				and min_amount = #{minAmount,jdbcType=DECIMAL}
+			</if>
+			<if test="onlinePay != null and onlinePay != ''" >
+				and online_pay = #{onlinePay,jdbcType=CHAR}
+			</if>
+			<if test="canUseTime != null and canUseTime != ''" >
+				and can_use_time = #{canUseTime,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark != ''" >
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="couponState != null" >
+				and coupon_state = #{couponState,jdbcType=CHAR}
+			</if>
+			<!--<if test="queryParam != null">
+				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">
+					and create_time between #{queryParam.startDate, jdbcType=VARCHAR} and #{queryParam.endDate, jdbcType=VARCHAR}
+				</if>
+				<if test="queryParam.keyword != null and queryParam.keyword != ''">
+					and (name like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') or other_col like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') )
+				</if>
+			</if>-->
+		</trim>
+	</where>
+  </select>
+</mapper>

@@ -1,6 +1,6 @@
 package com.fengshang.xiaodianbao.constant;
 
-public enum CouponStatus {
+public enum CouponState {
 
 	DELETED("已删除"),
 	EXPIRED("已过期"),
@@ -9,7 +9,7 @@ public enum CouponStatus {
 	;
 	
 	private String descp;
-	private CouponStatus(String descp){
+	private CouponState(String descp){
 		this.descp = descp;
 	}
 	public String getDescp() {

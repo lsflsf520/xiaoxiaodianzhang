@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengshang.xiaodianbao.shop.dao.ShopCouponNumDao" >
+  <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.shop.entity.ShopCouponNum" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="free_left_num" property="freeLeftNum" jdbcType="INTEGER" />
+    <result column="buy_left_num" property="buyLeftNum" jdbcType="INTEGER" />
+    <result column="buy_total_num" property="buyTotalNum" jdbcType="INTEGER" />
+    <result column="coupon_type" property="couponType" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_uptime" property="lastUptime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="BaseColumnList" >
+    id, shop_id, free_left_num, buy_left_num, buy_total_num, coupon_type, create_time, 
+    last_uptime
+  </sql>
+  <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="BaseColumnList" />
+    from shop_coupon_num
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPK" parameterType="java.lang.Integer" >
+    delete from shop_coupon_num
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fengshang.xiaodianbao.shop.entity.ShopCouponNum" >
+    insert into shop_coupon_num (id, shop_id, free_left_num, 
+      buy_left_num, buy_total_num, coupon_type, 
+      create_time, last_uptime)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{freeLeftNum,jdbcType=INTEGER}, 
+      #{buyLeftNum,jdbcType=INTEGER}, #{buyTotalNum,jdbcType=INTEGER}, #{couponType,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.shop.entity.ShopCouponNum" >
+    update shop_coupon_num
+    <set >
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="freeLeftNum != null" >
+        free_left_num = #{freeLeftNum,jdbcType=INTEGER},
+      </if>
+      <if test="buyLeftNum != null" >
+        buy_left_num = #{buyLeftNum,jdbcType=INTEGER},
+      </if>
+      <if test="buyTotalNum != null" >
+        buy_total_num = #{buyTotalNum,jdbcType=INTEGER},
+      </if>
+      <if test="couponType != null" >
+        coupon_type = #{couponType,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUptime != null" >
+        last_uptime = #{lastUptime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertReturnPK" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengshang.xiaodianbao.shop.entity.ShopCouponNum" >
+    insert into shop_coupon_num (id, shop_id, free_left_num, 
+      buy_left_num, buy_total_num, coupon_type, 
+      create_time, last_uptime)
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{freeLeftNum,jdbcType=INTEGER}, 
+      #{buyLeftNum,jdbcType=INTEGER}, #{buyTotalNum,jdbcType=INTEGER}, #{couponType,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into shop_coupon_num
+		(id,shop_id,free_left_num,buy_left_num,buy_total_num,coupon_type,create_time,last_uptime)
+	values 
+	<foreach collection="list" item="item" separator="," index="index">
+		(#{item.id,jdbcType=INTEGER},#{item.shopId,jdbcType=INTEGER},#{item.freeLeftNum,jdbcType=INTEGER},#{item.buyLeftNum,jdbcType=INTEGER},#{item.buyTotalNum,jdbcType=INTEGER},#{item.couponType,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+	</foreach>
+  </insert>
+  <delete id="batchDel" >
+    		delete from shop_coupon_num
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </delete>
+  <update id="updateStatus" >
+    		update shop_coupon_num
+			set ${statusColName} = #{delStatusVal, jdbcType=INTEGER}
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")">
+				#{item,jdbcType=INTEGER}
+			</foreach>
+  </update>
+  <select id="findByPks" resultMap="BaseResultMap" >
+    		select 
+			<include refid="BaseColumnList" />
+			from shop_coupon_num
+			where id in 
+				<foreach collection="pks" item="item" separator="," open="(" close=")"> 
+					#{item,jdbcType=INTEGER}
+				</foreach>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" >
+    select
+		<include refid="BaseColumnList"/>
+	from shop_coupon_num
+	<where>
+		<trim suffixOverrides="and" >
+			<if test="id != null and id > 0" >
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="shopId != null and shopId > 0" >
+				and shop_id = #{shopId,jdbcType=INTEGER}
+			</if>
+			<if test="freeLeftNum != null and freeLeftNum > 0" >
+				and free_left_num = #{freeLeftNum,jdbcType=INTEGER}
+			</if>
+			<if test="buyLeftNum != null and buyLeftNum > 0" >
+				and buy_left_num = #{buyLeftNum,jdbcType=INTEGER}
+			</if>
+			<if test="buyTotalNum != null and buyTotalNum > 0" >
+				and buy_total_num = #{buyTotalNum,jdbcType=INTEGER}
+			</if>
+			<if test="couponType != null" >
+				and coupon_type = #{couponType,jdbcType=CHAR}
+			</if>
+			<!--<if test="queryParam != null">
+				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">
+					and create_time between #{queryParam.startDate, jdbcType=VARCHAR} and #{queryParam.endDate, jdbcType=VARCHAR}
+				</if>
+				<if test="queryParam.keyword != null and queryParam.keyword != ''">
+					and (name like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') or other_col like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') )
+				</if>
+			</if>-->
+		</trim>
+	</where>
+  </select>
+</mapper>
