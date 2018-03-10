@@ -1,11 +1,11 @@
-package com.fengshang.xiaodianbao.customer.controller;
+package com.fengshang.xiaodianbao.shop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
-public class IndexController {
+@RequestMapping("shop")
+public class ShopController {
 
 	
 	

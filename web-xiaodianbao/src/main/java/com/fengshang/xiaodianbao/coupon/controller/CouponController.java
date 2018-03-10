@@ -1,10 +1,10 @@
-package com.fengshang.xiaodianbao.mgr.controller;
+package com.fengshang.xiaodianbao.coupon.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/couponsel")
-public class CouponSelController {
+@RequestMapping("coupon")
+public class CouponController {
 
 }
