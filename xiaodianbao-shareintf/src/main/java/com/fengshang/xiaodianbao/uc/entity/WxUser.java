@@ -1,11 +1,12 @@
 package com.fengshang.xiaodianbao.uc.entity;
 
+import com.xyz.tools.common.bean.IUser;
 import com.xyz.tools.common.constant.CommonStatus;
 import com.xyz.tools.common.constant.Sex;
 import com.xyz.tools.db.bean.BaseEntity;
 import java.util.Date;
 
-public class WxUser extends BaseEntity<Integer> {
+public class WxUser extends BaseEntity<Integer> implements IUser{
     private Integer id;
 
     private String nickName;
@@ -130,4 +131,29 @@ public class WxUser extends BaseEntity<Integer> {
     public Integer getPK() {
         return id;
     }
+
+	@Override
+	public long getUid() {
+		return this.getId();
+	}
+
+	@Override
+	public int getUidInt() {
+		return this.getId();
+	}
+
+	@Override
+	public String getRealName() {
+		return this.getNickName();
+	}
+
+	@Override
+	public String getEmail() {
+		return null;
+	}
+
+	@Override
+	public String getShowName() {
+		return this.getNickName();
+	}
 }

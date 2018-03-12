@@ -220,4 +220,19 @@ public class Shop extends BaseEntity<Integer> {
     public Integer getPK() {
         return id;
     }
+    
+    @Override
+    public int hashCode() {
+    	    int hashCode = 17;
+        if(this.getId() != null) {
+        	    hashCode *= this.getId();
+        }
+    	    return hashCode;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	    
+    	    return obj instanceof Shop && ((Shop)obj).getId() != null && ((Shop)obj).getId().equals(this.getId());
+    }
 }

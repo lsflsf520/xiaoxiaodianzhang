@@ -5,12 +5,13 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="priority" property="priority" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="CHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="last_uptime" property="lastUptime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="BaseColumnList" >
-    id, name, parent_id, status, create_time, last_uptime
+    id, name, parent_id, priority, status, create_time, last_uptime
   </sql>
   <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,11 +25,11 @@
   </delete>
   <insert id="insert" parameterType="com.fengshang.xiaodianbao.base.entity.Industry" >
     insert into industry (id, name, parent_id, 
-      status, create_time, last_uptime
-      )
+      priority, status, create_time, 
+      last_uptime)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
-      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
-      )
+      #{priority,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUptime,jdbcType=TIMESTAMP})
   </insert>
   <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.base.entity.Industry" >
     update industry
@@ -38,6 +39,9 @@
       </if>
       <if test="parentId != null" >
         parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=CHAR},
@@ -53,18 +57,18 @@
   </update>
   <insert id="insertReturnPK" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengshang.xiaodianbao.base.entity.Industry" >
     insert into industry (id, name, parent_id, 
-      status, create_time, last_uptime
-      )
+      priority, status, create_time, 
+      last_uptime)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
-      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
-      )
+      #{priority,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUptime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertBatch" parameterType="java.util.List" >
     insert into industry
-		(id,name,parent_id,status,create_time,last_uptime)
+		(id,name,parent_id,priority,status,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.id,jdbcType=INTEGER},#{item.name,jdbcType=VARCHAR},#{item.parentId,jdbcType=INTEGER},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.id,jdbcType=INTEGER},#{item.name,jdbcType=VARCHAR},#{item.parentId,jdbcType=INTEGER},#{item.priority,jdbcType=INTEGER},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -105,6 +109,9 @@
 			</if>
 			<if test="parentId != null and parentId > 0" >
 				and parent_id = #{parentId,jdbcType=INTEGER}
+			</if>
+			<if test="priority != null and priority > 0" >
+				and priority = #{priority,jdbcType=INTEGER}
 			</if>
 			<if test="status != null" >
 				and status = #{status,jdbcType=CHAR}

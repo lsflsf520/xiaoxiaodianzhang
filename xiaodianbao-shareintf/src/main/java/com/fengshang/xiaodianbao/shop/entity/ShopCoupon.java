@@ -1,5 +1,6 @@
 package com.fengshang.xiaodianbao.shop.entity;
 
+import com.fengshang.xiaodianbao.constant.CouponType;
 import com.xyz.tools.common.constant.CommonStatus;
 import com.xyz.tools.db.bean.BaseEntity;
 import java.math.BigDecimal;
@@ -12,7 +13,7 @@ public class ShopCoupon extends BaseEntity<Integer> {
 
     private Integer shopId;
 
-    private String couponType;
+    private CouponType couponType;
 
     private String tmplFileName;
 
@@ -66,12 +67,12 @@ public class ShopCoupon extends BaseEntity<Integer> {
         this.shopId = shopId;
     }
 
-    public String getCouponType() {
+    public CouponType getCouponType() {
         return couponType;
     }
 
-    public void setCouponType(String couponType) {
-        this.couponType = couponType == null ? null : couponType.trim();
+    public void setCouponType(CouponType couponType) {
+        this.couponType = couponType;
     }
 
     public String getTmplFileName() {

@@ -12,11 +12,12 @@
     <result column="xz_code" property="xzCode" jdbcType="CHAR" />
     <result column="pinyin" property="pinyin" jdbcType="VARCHAR" />
     <result column="quanpin" property="quanpin" jdbcType="VARCHAR" />
+    <result column="priority" property="priority" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="BaseColumnList" >
     id, name, short_name, parent_id, city_level, zone_num, post_code, xz_code, pinyin, 
-    quanpin, create_time
+    quanpin, priority, create_time
   </sql>
   <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,11 +33,13 @@
     insert into district (id, name, short_name, 
       parent_id, city_level, zone_num, 
       post_code, xz_code, pinyin, 
-      quanpin, create_time)
+      quanpin, priority, create_time
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
       #{parentId,jdbcType=INTEGER}, #{cityLevel,jdbcType=CHAR}, #{zoneNum,jdbcType=VARCHAR}, 
       #{postCode,jdbcType=CHAR}, #{xzCode,jdbcType=CHAR}, #{pinyin,jdbcType=VARCHAR}, 
-      #{quanpin,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+      #{quanpin,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.base.entity.District" >
     update district
@@ -68,6 +71,9 @@
       <if test="quanpin != null" >
         quanpin = #{quanpin,jdbcType=VARCHAR},
       </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -78,18 +84,20 @@
     insert into district (id, name, short_name, 
       parent_id, city_level, zone_num, 
       post_code, xz_code, pinyin, 
-      quanpin, create_time)
+      quanpin, priority, create_time
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
       #{parentId,jdbcType=INTEGER}, #{cityLevel,jdbcType=CHAR}, #{zoneNum,jdbcType=VARCHAR}, 
       #{postCode,jdbcType=CHAR}, #{xzCode,jdbcType=CHAR}, #{pinyin,jdbcType=VARCHAR}, 
-      #{quanpin,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+      #{quanpin,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertBatch" parameterType="java.util.List" >
     insert into district
-		(id,name,short_name,parent_id,city_level,zone_num,post_code,xz_code,pinyin,quanpin,create_time)
+		(id,name,short_name,parent_id,city_level,zone_num,post_code,xz_code,pinyin,quanpin,priority,create_time)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.id,jdbcType=INTEGER},#{item.name,jdbcType=VARCHAR},#{item.shortName,jdbcType=VARCHAR},#{item.parentId,jdbcType=INTEGER},#{item.cityLevel,jdbcType=CHAR},#{item.zoneNum,jdbcType=VARCHAR},#{item.postCode,jdbcType=CHAR},#{item.xzCode,jdbcType=CHAR},#{item.pinyin,jdbcType=VARCHAR},#{item.quanpin,jdbcType=VARCHAR},#{item.createTime,jdbcType=TIMESTAMP})
+		(#{item.id,jdbcType=INTEGER},#{item.name,jdbcType=VARCHAR},#{item.shortName,jdbcType=VARCHAR},#{item.parentId,jdbcType=INTEGER},#{item.cityLevel,jdbcType=CHAR},#{item.zoneNum,jdbcType=VARCHAR},#{item.postCode,jdbcType=CHAR},#{item.xzCode,jdbcType=CHAR},#{item.pinyin,jdbcType=VARCHAR},#{item.quanpin,jdbcType=VARCHAR},#{item.priority,jdbcType=INTEGER},#{item.createTime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -151,6 +159,9 @@
 			</if>
 			<if test="quanpin != null and quanpin != ''" >
 				and quanpin = #{quanpin,jdbcType=VARCHAR}
+			</if>
+			<if test="priority != null and priority > 0" >
+				and priority = #{priority,jdbcType=INTEGER}
 			</if>
 			<!--<if test="queryParam != null">
 				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">

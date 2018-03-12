@@ -1,9 +1,10 @@
 package com.fengshang.xiaodianbao.base.entity;
 
-import com.xyz.tools.db.bean.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xyz.tools.common.bean.AbstractTreeBean;
 import java.util.Date;
 
-public class District extends BaseEntity<Integer> {
+public class District extends AbstractTreeBean<Integer, District> {
     private Integer id;
 
     private String name;
@@ -23,6 +24,8 @@ public class District extends BaseEntity<Integer> {
     private String pinyin;
 
     private String quanpin;
+    
+    private Integer priority;
 
     private Date createTime;
 
@@ -58,6 +61,7 @@ public class District extends BaseEntity<Integer> {
         this.parentId = parentId;
     }
 
+    @JsonIgnore
     public String getCityLevel() {
         return cityLevel;
     }
@@ -66,6 +70,7 @@ public class District extends BaseEntity<Integer> {
         this.cityLevel = cityLevel == null ? null : cityLevel.trim();
     }
 
+    @JsonIgnore
     public String getZoneNum() {
         return zoneNum;
     }
@@ -74,6 +79,7 @@ public class District extends BaseEntity<Integer> {
         this.zoneNum = zoneNum == null ? null : zoneNum.trim();
     }
 
+    @JsonIgnore
     public String getPostCode() {
         return postCode;
     }
@@ -82,6 +88,7 @@ public class District extends BaseEntity<Integer> {
         this.postCode = postCode == null ? null : postCode.trim();
     }
 
+    @JsonIgnore
     public String getXzCode() {
         return xzCode;
     }
@@ -90,6 +97,7 @@ public class District extends BaseEntity<Integer> {
         this.xzCode = xzCode == null ? null : xzCode.trim();
     }
 
+    @JsonIgnore
     public String getPinyin() {
         return pinyin;
     }
@@ -98,6 +106,7 @@ public class District extends BaseEntity<Integer> {
         this.pinyin = pinyin == null ? null : pinyin.trim();
     }
 
+    @JsonIgnore
     public String getQuanpin() {
         return quanpin;
     }
@@ -105,7 +114,16 @@ public class District extends BaseEntity<Integer> {
     public void setQuanpin(String quanpin) {
         this.quanpin = quanpin == null ? null : quanpin.trim();
     }
+    
+    public Integer getPriority() {
+        return priority;
+    }
 
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
+    @JsonIgnore
     public Date getCreateTime() {
         return createTime;
     }
@@ -115,6 +133,7 @@ public class District extends BaseEntity<Integer> {
     }
 
     @Override
+    @JsonIgnore
     public Integer getPK() {
         return id;
     }

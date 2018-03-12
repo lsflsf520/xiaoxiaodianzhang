@@ -1,18 +1,22 @@
 package com.fengshang.xiaodianbao.base.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xyz.tools.common.bean.AbstractTreeBean;
 import com.xyz.tools.common.constant.CommonStatus;
 import com.xyz.tools.db.bean.BaseEntity;
 import java.util.Date;
 
-public class Industry extends BaseEntity<Integer> {
+public class Industry extends AbstractTreeBean<Integer, Industry> {
     private Integer id;
 
     private String name;
 
     private Integer parentId;
+    
+    private Integer priority;
 
     private CommonStatus status;
-
+    
     private Date createTime;
 
     private Date lastUptime;
@@ -40,7 +44,16 @@ public class Industry extends BaseEntity<Integer> {
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
+    
+    public Integer getPriority() {
+        return priority;
+    }
 
+    public void setPriority(Integer priority) {
+        this.priority = priority;
+    }
+
+    @JsonIgnore
     public CommonStatus getStatus() {
         return status;
     }
@@ -49,6 +62,7 @@ public class Industry extends BaseEntity<Integer> {
         this.status = status;
     }
 
+    @JsonIgnore
     public Date getCreateTime() {
         return createTime;
     }
@@ -57,6 +71,7 @@ public class Industry extends BaseEntity<Integer> {
         this.createTime = createTime;
     }
 
+    @JsonIgnore
     public Date getLastUptime() {
         return lastUptime;
     }
@@ -66,6 +81,7 @@ public class Industry extends BaseEntity<Integer> {
     }
 
     @Override
+    @JsonIgnore
     public Integer getPK() {
         return id;
     }

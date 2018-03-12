@@ -98,23 +98,17 @@
         </set>
 	  </constructor-arg>
 	</bean>
+	-->
 	
 	 <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="com.ujigu.secure.web.filter.LoginInterceptor">
-              <property name="excludeUrls" ref="excludeUrlSet"/>              
-            </bean>
+            <mvc:exclude-mapping path="/wxuser/saveWxUser.do"/>
+            <mvc:exclude-mapping path="/base/**"/>
+            <mvc:exclude-mapping path="/error/**"/>
+            <mvc:exclude-mapping path="/ping/pang.do"/>
+            <bean class="com.fengshang.xiaodianbao.aop.WxSessionInterceptor" />
         </mvc:interceptor> 
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/sys/port/index.do"/>
-            <mvc:exclude-mapping path="/sys/port/loadMenu.do"/>
-            <mvc:exclude-mapping path="/sys/port/welcome.do"/>
-            <bean class="com.ujigu.secure.sys.interceptor.AccessInterceptor">
-              <property name="excludeUrls" ref="excludeUrlSet"/>
-            </bean>
-        </mvc:interceptor>
      </mvc:interceptors>
-     -->
+     
 </beans>

@@ -52,7 +52,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.do</url-pattern>
 		<dispatcher>REQUEST</dispatcher>  
 	    <dispatcher>FORWARD</dispatcher>  
 	</filter-mapping>
@@ -65,7 +65,7 @@
 
 	<filter-mapping>
 		<filter-name>commonFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.do</url-pattern>
 		<dispatcher>REQUEST</dispatcher>  
 	    <dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
@@ -96,21 +96,4 @@
 	</session-config>
 
 
-	<error-page>
-		<error-code>500</error-code>
-		<location>/error/500.do</location>
-	</error-page>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/error/404.do</location>
-	</error-page>
-	<error-page>
-		<error-code>403</error-code>
-		<location>/error/403.do</location>
-	</error-page>
-	<error-page>
-		<error-code>503</error-code>
-		<location>/error/503.do</location>
-	</error-page>
-	
 </web-app>
