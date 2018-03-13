@@ -3,8 +3,8 @@
 <mapper namespace="com.fengshang.xiaodianbao.wallet.dao.WalletDao" >
   <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.wallet.entity.Wallet" >
     <id column="wx_uid" property="wxUid" jdbcType="INTEGER" />
-    <result column="balance" property="balance" jdbcType="DECIMAL" />
-    <result column="total_charge_amount" property="totalChargeAmount" jdbcType="DECIMAL" />
+    <result column="balance" property="balance" jdbcType="DOUBLE" />
+    <result column="total_charge_amount" property="totalChargeAmount" jdbcType="DOUBLE" />
     <result column="status" property="status" jdbcType="CHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="last_uptime" property="lastUptime" jdbcType="TIMESTAMP" />
@@ -26,7 +26,7 @@
     insert into wallet (wx_uid, balance, total_charge_amount, 
       status, create_time, last_uptime
       )
-    values (#{wxUid,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL}, #{totalChargeAmount,jdbcType=DECIMAL}, 
+    values (#{wxUid,jdbcType=INTEGER}, #{balance,jdbcType=DOUBLE}, #{totalChargeAmount,jdbcType=DOUBLE}, 
       #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -34,10 +34,10 @@
     update wallet
     <set >
       <if test="balance != null" >
-        balance = #{balance,jdbcType=DECIMAL},
+        balance = #{balance,jdbcType=DOUBLE},
       </if>
       <if test="totalChargeAmount != null" >
-        total_charge_amount = #{totalChargeAmount,jdbcType=DECIMAL},
+        total_charge_amount = #{totalChargeAmount,jdbcType=DOUBLE},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=CHAR},
@@ -55,7 +55,7 @@
     insert into wallet (wx_uid, balance, total_charge_amount, 
       status, create_time, last_uptime
       )
-    values (#{wxUid,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL}, #{totalChargeAmount,jdbcType=DECIMAL}, 
+    values (#{wxUid,jdbcType=INTEGER}, #{balance,jdbcType=DOUBLE}, #{totalChargeAmount,jdbcType=DOUBLE}, 
       #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -64,7 +64,7 @@
 		(wx_uid,balance,total_charge_amount,status,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.wxUid,jdbcType=INTEGER},#{item.balance,jdbcType=DECIMAL},#{item.totalChargeAmount,jdbcType=DECIMAL},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.wxUid,jdbcType=INTEGER},#{item.balance,jdbcType=DOUBLE},#{item.totalChargeAmount,jdbcType=DOUBLE},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -101,10 +101,10 @@
 				and wx_uid = #{wxUid,jdbcType=INTEGER}
 			</if>
 			<if test="balance != null" >
-				and balance = #{balance,jdbcType=DECIMAL}
+				and balance = #{balance,jdbcType=DOUBLE}
 			</if>
 			<if test="totalChargeAmount != null" >
-				and total_charge_amount = #{totalChargeAmount,jdbcType=DECIMAL}
+				and total_charge_amount = #{totalChargeAmount,jdbcType=DOUBLE}
 			</if>
 			<if test="status != null" >
 				and status = #{status,jdbcType=CHAR}

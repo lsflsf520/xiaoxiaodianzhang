@@ -1,7 +1,6 @@
 package com.fengshang.xiaodianbao.wallet.entity;
 
 import com.xyz.tools.db.bean.BaseEntity;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class CashLog extends BaseEntity<Integer> {
@@ -9,13 +8,13 @@ public class CashLog extends BaseEntity<Integer> {
 
     private Integer wxUid;
 
-    private BigDecimal cashAmount;
+    private Double cashAmount;
 
-    private BigDecimal preAmount;
+    private Double preAmount;
 
-    private BigDecimal afterAmount;
+    private Double afterAmount;
 
-    private BigDecimal lastCashLeftAmount;
+    private Double lastCashLeftAmount;
 
     private String thirdTradeId;
 
@@ -47,35 +46,35 @@ public class CashLog extends BaseEntity<Integer> {
         this.wxUid = wxUid;
     }
 
-    public BigDecimal getCashAmount() {
+    public Double getCashAmount() {
         return cashAmount;
     }
 
-    public void setCashAmount(BigDecimal cashAmount) {
+    public void setCashAmount(Double cashAmount) {
         this.cashAmount = cashAmount;
     }
 
-    public BigDecimal getPreAmount() {
+    public Double getPreAmount() {
         return preAmount;
     }
 
-    public void setPreAmount(BigDecimal preAmount) {
+    public void setPreAmount(Double preAmount) {
         this.preAmount = preAmount;
     }
 
-    public BigDecimal getAfterAmount() {
+    public Double getAfterAmount() {
         return afterAmount;
     }
 
-    public void setAfterAmount(BigDecimal afterAmount) {
+    public void setAfterAmount(Double afterAmount) {
         this.afterAmount = afterAmount;
     }
 
-    public BigDecimal getLastCashLeftAmount() {
+    public Double getLastCashLeftAmount() {
         return lastCashLeftAmount;
     }
 
-    public void setLastCashLeftAmount(BigDecimal lastCashLeftAmount) {
+    public void setLastCashLeftAmount(Double lastCashLeftAmount) {
         this.lastCashLeftAmount = lastCashLeftAmount;
     }
 

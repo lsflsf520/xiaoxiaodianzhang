@@ -4,10 +4,10 @@
   <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.wallet.entity.CashLog" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="wx_uid" property="wxUid" jdbcType="INTEGER" />
-    <result column="cash_amount" property="cashAmount" jdbcType="DECIMAL" />
-    <result column="pre_amount" property="preAmount" jdbcType="DECIMAL" />
-    <result column="after_amount" property="afterAmount" jdbcType="DECIMAL" />
-    <result column="last_cash_left_amount" property="lastCashLeftAmount" jdbcType="DECIMAL" />
+    <result column="cash_amount" property="cashAmount" jdbcType="DOUBLE" />
+    <result column="pre_amount" property="preAmount" jdbcType="DOUBLE" />
+    <result column="after_amount" property="afterAmount" jdbcType="DOUBLE" />
+    <result column="last_cash_left_amount" property="lastCashLeftAmount" jdbcType="DOUBLE" />
     <result column="third_trade_id" property="thirdTradeId" jdbcType="VARCHAR" />
     <result column="third_payment_no" property="thirdPaymentNo" jdbcType="VARCHAR" />
     <result column="third_result_code" property="thirdResultCode" jdbcType="VARCHAR" />
@@ -36,8 +36,8 @@
       third_trade_id, third_payment_no, third_result_code, 
       snapshot, status, create_time, 
       last_uptime)
-    values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{cashAmount,jdbcType=DECIMAL}, 
-      #{preAmount,jdbcType=DECIMAL}, #{afterAmount,jdbcType=DECIMAL}, #{lastCashLeftAmount,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{cashAmount,jdbcType=DOUBLE}, 
+      #{preAmount,jdbcType=DOUBLE}, #{afterAmount,jdbcType=DOUBLE}, #{lastCashLeftAmount,jdbcType=DOUBLE}, 
       #{thirdTradeId,jdbcType=VARCHAR}, #{thirdPaymentNo,jdbcType=VARCHAR}, #{thirdResultCode,jdbcType=VARCHAR}, 
       #{snapshot,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUptime,jdbcType=TIMESTAMP})
@@ -49,16 +49,16 @@
         wx_uid = #{wxUid,jdbcType=INTEGER},
       </if>
       <if test="cashAmount != null" >
-        cash_amount = #{cashAmount,jdbcType=DECIMAL},
+        cash_amount = #{cashAmount,jdbcType=DOUBLE},
       </if>
       <if test="preAmount != null" >
-        pre_amount = #{preAmount,jdbcType=DECIMAL},
+        pre_amount = #{preAmount,jdbcType=DOUBLE},
       </if>
       <if test="afterAmount != null" >
-        after_amount = #{afterAmount,jdbcType=DECIMAL},
+        after_amount = #{afterAmount,jdbcType=DOUBLE},
       </if>
       <if test="lastCashLeftAmount != null" >
-        last_cash_left_amount = #{lastCashLeftAmount,jdbcType=DECIMAL},
+        last_cash_left_amount = #{lastCashLeftAmount,jdbcType=DOUBLE},
       </if>
       <if test="thirdTradeId != null" >
         third_trade_id = #{thirdTradeId,jdbcType=VARCHAR},
@@ -90,8 +90,8 @@
       third_trade_id, third_payment_no, third_result_code, 
       snapshot, status, create_time, 
       last_uptime)
-    values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{cashAmount,jdbcType=DECIMAL}, 
-      #{preAmount,jdbcType=DECIMAL}, #{afterAmount,jdbcType=DECIMAL}, #{lastCashLeftAmount,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{cashAmount,jdbcType=DOUBLE}, 
+      #{preAmount,jdbcType=DOUBLE}, #{afterAmount,jdbcType=DOUBLE}, #{lastCashLeftAmount,jdbcType=DOUBLE}, 
       #{thirdTradeId,jdbcType=VARCHAR}, #{thirdPaymentNo,jdbcType=VARCHAR}, #{thirdResultCode,jdbcType=VARCHAR}, 
       #{snapshot,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUptime,jdbcType=TIMESTAMP})
@@ -101,7 +101,7 @@
 		(id,wx_uid,cash_amount,pre_amount,after_amount,last_cash_left_amount,third_trade_id,third_payment_no,third_result_code,snapshot,status,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.id,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.cashAmount,jdbcType=DECIMAL},#{item.preAmount,jdbcType=DECIMAL},#{item.afterAmount,jdbcType=DECIMAL},#{item.lastCashLeftAmount,jdbcType=DECIMAL},#{item.thirdTradeId,jdbcType=VARCHAR},#{item.thirdPaymentNo,jdbcType=VARCHAR},#{item.thirdResultCode,jdbcType=VARCHAR},#{item.snapshot,jdbcType=VARCHAR},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.id,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.cashAmount,jdbcType=DOUBLE},#{item.preAmount,jdbcType=DOUBLE},#{item.afterAmount,jdbcType=DOUBLE},#{item.lastCashLeftAmount,jdbcType=DOUBLE},#{item.thirdTradeId,jdbcType=VARCHAR},#{item.thirdPaymentNo,jdbcType=VARCHAR},#{item.thirdResultCode,jdbcType=VARCHAR},#{item.snapshot,jdbcType=VARCHAR},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -141,16 +141,16 @@
 				and wx_uid = #{wxUid,jdbcType=INTEGER}
 			</if>
 			<if test="cashAmount != null" >
-				and cash_amount = #{cashAmount,jdbcType=DECIMAL}
+				and cash_amount = #{cashAmount,jdbcType=DOUBLE}
 			</if>
 			<if test="preAmount != null" >
-				and pre_amount = #{preAmount,jdbcType=DECIMAL}
+				and pre_amount = #{preAmount,jdbcType=DOUBLE}
 			</if>
 			<if test="afterAmount != null" >
-				and after_amount = #{afterAmount,jdbcType=DECIMAL}
+				and after_amount = #{afterAmount,jdbcType=DOUBLE}
 			</if>
 			<if test="lastCashLeftAmount != null" >
-				and last_cash_left_amount = #{lastCashLeftAmount,jdbcType=DECIMAL}
+				and last_cash_left_amount = #{lastCashLeftAmount,jdbcType=DOUBLE}
 			</if>
 			<if test="thirdTradeId != null and thirdTradeId != ''" >
 				and third_trade_id = #{thirdTradeId,jdbcType=VARCHAR}

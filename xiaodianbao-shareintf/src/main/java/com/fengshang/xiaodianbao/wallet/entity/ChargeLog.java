@@ -3,7 +3,6 @@ package com.fengshang.xiaodianbao.wallet.entity;
 import com.xyz.tools.common.constant.OrdState;
 import com.xyz.tools.common.constant.PayMethod;
 import com.xyz.tools.db.bean.BaseEntity;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class ChargeLog extends BaseEntity<Integer> {
@@ -11,9 +10,9 @@ public class ChargeLog extends BaseEntity<Integer> {
 
     private Integer wxUid;
 
-    private BigDecimal chargeAmount;
+    private Double chargeAmount;
 
-    private BigDecimal preAmount;
+    private Double preAmount;
 
     private PayMethod payMethod;
 
@@ -45,19 +44,19 @@ public class ChargeLog extends BaseEntity<Integer> {
         this.wxUid = wxUid;
     }
 
-    public BigDecimal getChargeAmount() {
+    public Double getChargeAmount() {
         return chargeAmount;
     }
 
-    public void setChargeAmount(BigDecimal chargeAmount) {
+    public void setChargeAmount(Double chargeAmount) {
         this.chargeAmount = chargeAmount;
     }
 
-    public BigDecimal getPreAmount() {
+    public Double getPreAmount() {
         return preAmount;
     }
 
-    public void setPreAmount(BigDecimal preAmount) {
+    public void setPreAmount(Double preAmount) {
         this.preAmount = preAmount;
     }
 

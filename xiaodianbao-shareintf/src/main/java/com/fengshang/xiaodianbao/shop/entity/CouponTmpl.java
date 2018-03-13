@@ -3,7 +3,6 @@ package com.fengshang.xiaodianbao.shop.entity;
 import com.fengshang.xiaodianbao.constant.CouponType;
 import com.xyz.tools.common.constant.CommonStatus;
 import com.xyz.tools.db.bean.BaseEntity;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class CouponTmpl extends BaseEntity<Integer> {
@@ -15,9 +14,9 @@ public class CouponTmpl extends BaseEntity<Integer> {
 
     private String discountType;
 
-    private BigDecimal discount;
+    private Double discount;
 
-    private BigDecimal minAmount;
+    private Double minAmount;
 
     private Integer dayLimitNum;
 
@@ -71,19 +70,19 @@ public class CouponTmpl extends BaseEntity<Integer> {
         this.discountType = discountType == null ? null : discountType.trim();
     }
 
-    public BigDecimal getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(BigDecimal discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 
-    public BigDecimal getMinAmount() {
+    public Double getMinAmount() {
         return minAmount;
     }
 
-    public void setMinAmount(BigDecimal minAmount) {
+    public void setMinAmount(Double minAmount) {
         this.minAmount = minAmount;
     }
 

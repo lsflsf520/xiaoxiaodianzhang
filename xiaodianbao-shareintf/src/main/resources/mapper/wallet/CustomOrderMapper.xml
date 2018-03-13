@@ -4,11 +4,11 @@
   <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.wallet.entity.CustomOrder" >
     <id column="user_coupon_id" property="userCouponId" jdbcType="INTEGER" />
     <result column="wx_uid" property="wxUid" jdbcType="INTEGER" />
-    <result column="ord_fee" property="ordFee" jdbcType="DECIMAL" />
-    <result column="can_use_fee" property="canUseFee" jdbcType="DECIMAL" />
-    <result column="left_pay_fee" property="leftPayFee" jdbcType="DECIMAL" />
-    <result column="balance_pay_fee" property="balancePayFee" jdbcType="DECIMAL" />
-    <result column="third_pay_fee" property="thirdPayFee" jdbcType="DECIMAL" />
+    <result column="ord_fee" property="ordFee" jdbcType="DOUBLE" />
+    <result column="can_use_fee" property="canUseFee" jdbcType="DOUBLE" />
+    <result column="left_pay_fee" property="leftPayFee" jdbcType="DOUBLE" />
+    <result column="balance_pay_fee" property="balancePayFee" jdbcType="DOUBLE" />
+    <result column="third_pay_fee" property="thirdPayFee" jdbcType="DOUBLE" />
     <result column="pay_method" property="payMethod" jdbcType="CHAR" />
     <result column="third_trade_id" property="thirdTradeId" jdbcType="VARCHAR" />
     <result column="third_payment_no" property="thirdPaymentNo" jdbcType="VARCHAR" />
@@ -36,9 +36,9 @@
       third_pay_fee, pay_method, third_trade_id, 
       third_payment_no, ord_state, create_time, 
       last_uptime)
-    values (#{userCouponId,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{ordFee,jdbcType=DECIMAL}, 
-      #{canUseFee,jdbcType=DECIMAL}, #{leftPayFee,jdbcType=DECIMAL}, #{balancePayFee,jdbcType=DECIMAL}, 
-      #{thirdPayFee,jdbcType=DECIMAL}, #{payMethod,jdbcType=CHAR}, #{thirdTradeId,jdbcType=VARCHAR}, 
+    values (#{userCouponId,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{ordFee,jdbcType=DOUBLE}, 
+      #{canUseFee,jdbcType=DOUBLE}, #{leftPayFee,jdbcType=DOUBLE}, #{balancePayFee,jdbcType=DOUBLE}, 
+      #{thirdPayFee,jdbcType=DOUBLE}, #{payMethod,jdbcType=CHAR}, #{thirdTradeId,jdbcType=VARCHAR}, 
       #{thirdPaymentNo,jdbcType=VARCHAR}, #{ordState,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUptime,jdbcType=TIMESTAMP})
   </insert>
@@ -49,19 +49,19 @@
         wx_uid = #{wxUid,jdbcType=INTEGER},
       </if>
       <if test="ordFee != null" >
-        ord_fee = #{ordFee,jdbcType=DECIMAL},
+        ord_fee = #{ordFee,jdbcType=DOUBLE},
       </if>
       <if test="canUseFee != null" >
-        can_use_fee = #{canUseFee,jdbcType=DECIMAL},
+        can_use_fee = #{canUseFee,jdbcType=DOUBLE},
       </if>
       <if test="leftPayFee != null" >
-        left_pay_fee = #{leftPayFee,jdbcType=DECIMAL},
+        left_pay_fee = #{leftPayFee,jdbcType=DOUBLE},
       </if>
       <if test="balancePayFee != null" >
-        balance_pay_fee = #{balancePayFee,jdbcType=DECIMAL},
+        balance_pay_fee = #{balancePayFee,jdbcType=DOUBLE},
       </if>
       <if test="thirdPayFee != null" >
-        third_pay_fee = #{thirdPayFee,jdbcType=DECIMAL},
+        third_pay_fee = #{thirdPayFee,jdbcType=DOUBLE},
       </if>
       <if test="payMethod != null" >
         pay_method = #{payMethod,jdbcType=CHAR},
@@ -90,9 +90,9 @@
       third_pay_fee, pay_method, third_trade_id, 
       third_payment_no, ord_state, create_time, 
       last_uptime)
-    values (#{userCouponId,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{ordFee,jdbcType=DECIMAL}, 
-      #{canUseFee,jdbcType=DECIMAL}, #{leftPayFee,jdbcType=DECIMAL}, #{balancePayFee,jdbcType=DECIMAL}, 
-      #{thirdPayFee,jdbcType=DECIMAL}, #{payMethod,jdbcType=CHAR}, #{thirdTradeId,jdbcType=VARCHAR}, 
+    values (#{userCouponId,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{ordFee,jdbcType=DOUBLE}, 
+      #{canUseFee,jdbcType=DOUBLE}, #{leftPayFee,jdbcType=DOUBLE}, #{balancePayFee,jdbcType=DOUBLE}, 
+      #{thirdPayFee,jdbcType=DOUBLE}, #{payMethod,jdbcType=CHAR}, #{thirdTradeId,jdbcType=VARCHAR}, 
       #{thirdPaymentNo,jdbcType=VARCHAR}, #{ordState,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUptime,jdbcType=TIMESTAMP})
   </insert>
@@ -101,7 +101,7 @@
 		(user_coupon_id,wx_uid,ord_fee,can_use_fee,left_pay_fee,balance_pay_fee,third_pay_fee,pay_method,third_trade_id,third_payment_no,ord_state,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.userCouponId,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.ordFee,jdbcType=DECIMAL},#{item.canUseFee,jdbcType=DECIMAL},#{item.leftPayFee,jdbcType=DECIMAL},#{item.balancePayFee,jdbcType=DECIMAL},#{item.thirdPayFee,jdbcType=DECIMAL},#{item.payMethod,jdbcType=CHAR},#{item.thirdTradeId,jdbcType=VARCHAR},#{item.thirdPaymentNo,jdbcType=VARCHAR},#{item.ordState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.userCouponId,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.ordFee,jdbcType=DOUBLE},#{item.canUseFee,jdbcType=DOUBLE},#{item.leftPayFee,jdbcType=DOUBLE},#{item.balancePayFee,jdbcType=DOUBLE},#{item.thirdPayFee,jdbcType=DOUBLE},#{item.payMethod,jdbcType=CHAR},#{item.thirdTradeId,jdbcType=VARCHAR},#{item.thirdPaymentNo,jdbcType=VARCHAR},#{item.ordState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -141,19 +141,19 @@
 				and wx_uid = #{wxUid,jdbcType=INTEGER}
 			</if>
 			<if test="ordFee != null" >
-				and ord_fee = #{ordFee,jdbcType=DECIMAL}
+				and ord_fee = #{ordFee,jdbcType=DOUBLE}
 			</if>
 			<if test="canUseFee != null" >
-				and can_use_fee = #{canUseFee,jdbcType=DECIMAL}
+				and can_use_fee = #{canUseFee,jdbcType=DOUBLE}
 			</if>
 			<if test="leftPayFee != null" >
-				and left_pay_fee = #{leftPayFee,jdbcType=DECIMAL}
+				and left_pay_fee = #{leftPayFee,jdbcType=DOUBLE}
 			</if>
 			<if test="balancePayFee != null" >
-				and balance_pay_fee = #{balancePayFee,jdbcType=DECIMAL}
+				and balance_pay_fee = #{balancePayFee,jdbcType=DOUBLE}
 			</if>
 			<if test="thirdPayFee != null" >
-				and third_pay_fee = #{thirdPayFee,jdbcType=DECIMAL}
+				and third_pay_fee = #{thirdPayFee,jdbcType=DOUBLE}
 			</if>
 			<if test="payMethod != null" >
 				and pay_method = #{payMethod,jdbcType=CHAR}

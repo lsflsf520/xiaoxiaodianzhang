@@ -1,9 +1,9 @@
 package com.fengshang.xiaodianbao.shop.entity;
 
 import com.fengshang.xiaodianbao.constant.CouponType;
+import com.fengshang.xiaodianbao.constant.DiscountType;
 import com.xyz.tools.common.constant.CommonStatus;
 import com.xyz.tools.db.bean.BaseEntity;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class ShopCoupon extends BaseEntity<Integer> {
@@ -17,11 +17,11 @@ public class ShopCoupon extends BaseEntity<Integer> {
 
     private String tmplFileName;
 
-    private String discountType;
+    private DiscountType discountType;
 
-    private BigDecimal discount;
+    private Double discount;
 
-    private BigDecimal minAmount;
+    private Double minAmount;
 
     private Integer dayLimitNum;
 
@@ -83,27 +83,27 @@ public class ShopCoupon extends BaseEntity<Integer> {
         this.tmplFileName = tmplFileName == null ? null : tmplFileName.trim();
     }
 
-    public String getDiscountType() {
+    public DiscountType getDiscountType() {
         return discountType;
     }
 
-    public void setDiscountType(String discountType) {
-        this.discountType = discountType == null ? null : discountType.trim();
+    public void setDiscountType(DiscountType discountType) {
+        this.discountType = discountType;
     }
 
-    public BigDecimal getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(BigDecimal discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 
-    public BigDecimal getMinAmount() {
+    public Double getMinAmount() {
         return minAmount;
     }
 
-    public void setMinAmount(BigDecimal minAmount) {
+    public void setMinAmount(Double minAmount) {
         this.minAmount = minAmount;
     }
 

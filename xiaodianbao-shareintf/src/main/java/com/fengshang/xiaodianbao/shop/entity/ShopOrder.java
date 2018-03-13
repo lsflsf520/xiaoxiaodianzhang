@@ -4,7 +4,6 @@ import com.fengshang.xiaodianbao.constant.CouponType;
 import com.xyz.tools.common.constant.OrdState;
 import com.xyz.tools.common.constant.PayMethod;
 import com.xyz.tools.db.bean.BaseEntity;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class ShopOrder extends BaseEntity<Integer> {
@@ -16,13 +15,13 @@ public class ShopOrder extends BaseEntity<Integer> {
 
     private Integer sendNum;
 
-    private BigDecimal payFee;
+    private Double payFee;
 
     private PayMethod payMethod;
 
-    private BigDecimal balancePayFee;
+    private Double balancePayFee;
 
-    private BigDecimal thirdPayFee;
+    private Double thirdPayFee;
 
     private String thirdTradeId;
 
@@ -68,11 +67,11 @@ public class ShopOrder extends BaseEntity<Integer> {
         this.sendNum = sendNum;
     }
 
-    public BigDecimal getPayFee() {
+    public Double getPayFee() {
         return payFee;
     }
 
-    public void setPayFee(BigDecimal payFee) {
+    public void setPayFee(Double payFee) {
         this.payFee = payFee;
     }
 
@@ -84,19 +83,19 @@ public class ShopOrder extends BaseEntity<Integer> {
         this.payMethod = payMethod;
     }
 
-    public BigDecimal getBalancePayFee() {
+    public Double getBalancePayFee() {
         return balancePayFee;
     }
 
-    public void setBalancePayFee(BigDecimal balancePayFee) {
+    public void setBalancePayFee(Double balancePayFee) {
         this.balancePayFee = balancePayFee;
     }
 
-    public BigDecimal getThirdPayFee() {
+    public Double getThirdPayFee() {
         return thirdPayFee;
     }
 
-    public void setThirdPayFee(BigDecimal thirdPayFee) {
+    public void setThirdPayFee(Double thirdPayFee) {
         this.thirdPayFee = thirdPayFee;
     }
 

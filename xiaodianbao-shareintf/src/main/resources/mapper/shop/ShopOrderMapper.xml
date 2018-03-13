@@ -6,10 +6,10 @@
     <result column="shop_id" property="shopId" jdbcType="INTEGER" />
     <result column="buy_num" property="buyNum" jdbcType="INTEGER" />
     <result column="send_num" property="sendNum" jdbcType="INTEGER" />
-    <result column="pay_fee" property="payFee" jdbcType="DECIMAL" />
+    <result column="pay_fee" property="payFee" jdbcType="DOUBLE" />
     <result column="pay_method" property="payMethod" jdbcType="CHAR" />
-    <result column="balance_pay_fee" property="balancePayFee" jdbcType="DECIMAL" />
-    <result column="third_pay_fee" property="thirdPayFee" jdbcType="DECIMAL" />
+    <result column="balance_pay_fee" property="balancePayFee" jdbcType="DOUBLE" />
+    <result column="third_pay_fee" property="thirdPayFee" jdbcType="DOUBLE" />
     <result column="third_trade_id" property="thirdTradeId" jdbcType="VARCHAR" />
     <result column="third_payment_no" property="thirdPaymentNo" jdbcType="VARCHAR" />
     <result column="coupon_type" property="couponType" jdbcType="CHAR" />
@@ -38,8 +38,8 @@
       third_payment_no, coupon_type, ord_state, 
       create_time, last_uptime)
     values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{buyNum,jdbcType=INTEGER}, 
-      #{sendNum,jdbcType=INTEGER}, #{payFee,jdbcType=DECIMAL}, #{payMethod,jdbcType=CHAR}, 
-      #{balancePayFee,jdbcType=DECIMAL}, #{thirdPayFee,jdbcType=DECIMAL}, #{thirdTradeId,jdbcType=VARCHAR}, 
+      #{sendNum,jdbcType=INTEGER}, #{payFee,jdbcType=DOUBLE}, #{payMethod,jdbcType=CHAR}, 
+      #{balancePayFee,jdbcType=DOUBLE}, #{thirdPayFee,jdbcType=DOUBLE}, #{thirdTradeId,jdbcType=VARCHAR}, 
       #{thirdPaymentNo,jdbcType=VARCHAR}, #{couponType,jdbcType=CHAR}, #{ordState,jdbcType=CHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
   </insert>
@@ -56,16 +56,16 @@
         send_num = #{sendNum,jdbcType=INTEGER},
       </if>
       <if test="payFee != null" >
-        pay_fee = #{payFee,jdbcType=DECIMAL},
+        pay_fee = #{payFee,jdbcType=DOUBLE},
       </if>
       <if test="payMethod != null" >
         pay_method = #{payMethod,jdbcType=CHAR},
       </if>
       <if test="balancePayFee != null" >
-        balance_pay_fee = #{balancePayFee,jdbcType=DECIMAL},
+        balance_pay_fee = #{balancePayFee,jdbcType=DOUBLE},
       </if>
       <if test="thirdPayFee != null" >
-        third_pay_fee = #{thirdPayFee,jdbcType=DECIMAL},
+        third_pay_fee = #{thirdPayFee,jdbcType=DOUBLE},
       </if>
       <if test="thirdTradeId != null" >
         third_trade_id = #{thirdTradeId,jdbcType=VARCHAR},
@@ -95,8 +95,8 @@
       third_payment_no, coupon_type, ord_state, 
       create_time, last_uptime)
     values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{buyNum,jdbcType=INTEGER}, 
-      #{sendNum,jdbcType=INTEGER}, #{payFee,jdbcType=DECIMAL}, #{payMethod,jdbcType=CHAR}, 
-      #{balancePayFee,jdbcType=DECIMAL}, #{thirdPayFee,jdbcType=DECIMAL}, #{thirdTradeId,jdbcType=VARCHAR}, 
+      #{sendNum,jdbcType=INTEGER}, #{payFee,jdbcType=DOUBLE}, #{payMethod,jdbcType=CHAR}, 
+      #{balancePayFee,jdbcType=DOUBLE}, #{thirdPayFee,jdbcType=DOUBLE}, #{thirdTradeId,jdbcType=VARCHAR}, 
       #{thirdPaymentNo,jdbcType=VARCHAR}, #{couponType,jdbcType=CHAR}, #{ordState,jdbcType=CHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
   </insert>
@@ -105,7 +105,7 @@
 		(id,shop_id,buy_num,send_num,pay_fee,pay_method,balance_pay_fee,third_pay_fee,third_trade_id,third_payment_no,coupon_type,ord_state,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.id,jdbcType=INTEGER},#{item.shopId,jdbcType=INTEGER},#{item.buyNum,jdbcType=INTEGER},#{item.sendNum,jdbcType=INTEGER},#{item.payFee,jdbcType=DECIMAL},#{item.payMethod,jdbcType=CHAR},#{item.balancePayFee,jdbcType=DECIMAL},#{item.thirdPayFee,jdbcType=DECIMAL},#{item.thirdTradeId,jdbcType=VARCHAR},#{item.thirdPaymentNo,jdbcType=VARCHAR},#{item.couponType,jdbcType=CHAR},#{item.ordState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.id,jdbcType=INTEGER},#{item.shopId,jdbcType=INTEGER},#{item.buyNum,jdbcType=INTEGER},#{item.sendNum,jdbcType=INTEGER},#{item.payFee,jdbcType=DOUBLE},#{item.payMethod,jdbcType=CHAR},#{item.balancePayFee,jdbcType=DOUBLE},#{item.thirdPayFee,jdbcType=DOUBLE},#{item.thirdTradeId,jdbcType=VARCHAR},#{item.thirdPaymentNo,jdbcType=VARCHAR},#{item.couponType,jdbcType=CHAR},#{item.ordState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -151,16 +151,16 @@
 				and send_num = #{sendNum,jdbcType=INTEGER}
 			</if>
 			<if test="payFee != null" >
-				and pay_fee = #{payFee,jdbcType=DECIMAL}
+				and pay_fee = #{payFee,jdbcType=DOUBLE}
 			</if>
 			<if test="payMethod != null" >
 				and pay_method = #{payMethod,jdbcType=CHAR}
 			</if>
 			<if test="balancePayFee != null" >
-				and balance_pay_fee = #{balancePayFee,jdbcType=DECIMAL}
+				and balance_pay_fee = #{balancePayFee,jdbcType=DOUBLE}
 			</if>
 			<if test="thirdPayFee != null" >
-				and third_pay_fee = #{thirdPayFee,jdbcType=DECIMAL}
+				and third_pay_fee = #{thirdPayFee,jdbcType=DOUBLE}
 			</if>
 			<if test="thirdTradeId != null and thirdTradeId != ''" >
 				and third_trade_id = #{thirdTradeId,jdbcType=VARCHAR}

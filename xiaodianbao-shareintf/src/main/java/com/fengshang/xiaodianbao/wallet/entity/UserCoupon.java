@@ -4,7 +4,6 @@ import com.fengshang.xiaodianbao.constant.CouponState;
 import com.fengshang.xiaodianbao.constant.CouponType;
 import com.fengshang.xiaodianbao.constant.DiscountType;
 import com.xyz.tools.db.bean.BaseEntity;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class UserCoupon extends BaseEntity<Integer> {
@@ -22,9 +21,9 @@ public class UserCoupon extends BaseEntity<Integer> {
 
     private DiscountType discountType;
 
-    private BigDecimal discount;
+    private Double discount;
 
-    private BigDecimal minAmount;
+    private Double minAmount;
 
     private String onlinePay;
 
@@ -98,19 +97,19 @@ public class UserCoupon extends BaseEntity<Integer> {
         this.discountType = discountType;
     }
 
-    public BigDecimal getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(BigDecimal discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 
-    public BigDecimal getMinAmount() {
+    public Double getMinAmount() {
         return minAmount;
     }
 
-    public void setMinAmount(BigDecimal minAmount) {
+    public void setMinAmount(Double minAmount) {
         this.minAmount = minAmount;
     }
 

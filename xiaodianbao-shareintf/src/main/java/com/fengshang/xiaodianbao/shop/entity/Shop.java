@@ -2,7 +2,6 @@ package com.fengshang.xiaodianbao.shop.entity;
 
 import com.xyz.tools.common.constant.CheckState;
 import com.xyz.tools.db.bean.BaseEntity;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Shop extends BaseEntity<Integer> {
@@ -34,9 +33,9 @@ public class Shop extends BaseEntity<Integer> {
 
     private String detailAddr;
 
-    private BigDecimal lng;
+    private Double lng;
 
-    private BigDecimal lat;
+    private Double lat;
 
     private Integer wxUid;
 
@@ -160,19 +159,19 @@ public class Shop extends BaseEntity<Integer> {
         this.detailAddr = detailAddr == null ? null : detailAddr.trim();
     }
 
-    public BigDecimal getLng() {
+    public Double getLng() {
         return lng;
     }
 
-    public void setLng(BigDecimal lng) {
+    public void setLng(Double lng) {
         this.lng = lng;
     }
 
-    public BigDecimal getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(BigDecimal lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 

@@ -3,7 +3,6 @@ package com.fengshang.xiaodianbao.wallet.entity;
 import com.xyz.tools.common.constant.OrdState;
 import com.xyz.tools.common.constant.PayMethod;
 import com.xyz.tools.db.bean.BaseEntity;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class CustomOrder extends BaseEntity<Integer> {
@@ -11,15 +10,15 @@ public class CustomOrder extends BaseEntity<Integer> {
 
     private Integer wxUid;
 
-    private BigDecimal ordFee;
+    private Double ordFee;
 
-    private BigDecimal canUseFee;
+    private Double canUseFee;
 
-    private BigDecimal leftPayFee;
+    private Double leftPayFee;
 
-    private BigDecimal balancePayFee;
+    private Double balancePayFee;
 
-    private BigDecimal thirdPayFee;
+    private Double thirdPayFee;
 
     private PayMethod payMethod;
 
@@ -49,43 +48,43 @@ public class CustomOrder extends BaseEntity<Integer> {
         this.wxUid = wxUid;
     }
 
-    public BigDecimal getOrdFee() {
+    public Double getOrdFee() {
         return ordFee;
     }
 
-    public void setOrdFee(BigDecimal ordFee) {
+    public void setOrdFee(Double ordFee) {
         this.ordFee = ordFee;
     }
 
-    public BigDecimal getCanUseFee() {
+    public Double getCanUseFee() {
         return canUseFee;
     }
 
-    public void setCanUseFee(BigDecimal canUseFee) {
+    public void setCanUseFee(Double canUseFee) {
         this.canUseFee = canUseFee;
     }
 
-    public BigDecimal getLeftPayFee() {
+    public Double getLeftPayFee() {
         return leftPayFee;
     }
 
-    public void setLeftPayFee(BigDecimal leftPayFee) {
+    public void setLeftPayFee(Double leftPayFee) {
         this.leftPayFee = leftPayFee;
     }
 
-    public BigDecimal getBalancePayFee() {
+    public Double getBalancePayFee() {
         return balancePayFee;
     }
 
-    public void setBalancePayFee(BigDecimal balancePayFee) {
+    public void setBalancePayFee(Double balancePayFee) {
         this.balancePayFee = balancePayFee;
     }
 
-    public BigDecimal getThirdPayFee() {
+    public Double getThirdPayFee() {
         return thirdPayFee;
     }
 
-    public void setThirdPayFee(BigDecimal thirdPayFee) {
+    public void setThirdPayFee(Double thirdPayFee) {
         this.thirdPayFee = thirdPayFee;
     }
 

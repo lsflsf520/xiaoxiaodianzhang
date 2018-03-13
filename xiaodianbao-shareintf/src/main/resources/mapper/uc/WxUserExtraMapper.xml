@@ -8,8 +8,8 @@
     <result column="city" property="city" jdbcType="VARCHAR" />
     <result column="county_id" property="countyId" jdbcType="INTEGER" />
     <result column="detail_addr" property="detailAddr" jdbcType="VARCHAR" />
-    <result column="lng" property="lng" jdbcType="DECIMAL" />
-    <result column="lat" property="lat" jdbcType="DECIMAL" />
+    <result column="lng" property="lng" jdbcType="DOUBLE" />
+    <result column="lat" property="lat" jdbcType="DOUBLE" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="last_uptime" property="lastUptime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -33,7 +33,7 @@
       last_uptime)
     values (#{wxUid,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
       #{city,jdbcType=VARCHAR}, #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, 
-      #{lng,jdbcType=DECIMAL}, #{lat,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lng,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUptime,jdbcType=TIMESTAMP})
   </insert>
   <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.uc.entity.WxUserExtra" >
@@ -55,10 +55,10 @@
         detail_addr = #{detailAddr,jdbcType=VARCHAR},
       </if>
       <if test="lng != null" >
-        lng = #{lng,jdbcType=DECIMAL},
+        lng = #{lng,jdbcType=DOUBLE},
       </if>
       <if test="lat != null" >
-        lat = #{lat,jdbcType=DECIMAL},
+        lat = #{lat,jdbcType=DOUBLE},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -76,7 +76,7 @@
       last_uptime)
     values (#{wxUid,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
       #{city,jdbcType=VARCHAR}, #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, 
-      #{lng,jdbcType=DECIMAL}, #{lat,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lng,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUptime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertBatch" parameterType="java.util.List" >
@@ -84,7 +84,7 @@
 		(wx_uid,country,province,city,county_id,detail_addr,lng,lat,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.wxUid,jdbcType=INTEGER},#{item.country,jdbcType=VARCHAR},#{item.province,jdbcType=VARCHAR},#{item.city,jdbcType=VARCHAR},#{item.countyId,jdbcType=INTEGER},#{item.detailAddr,jdbcType=VARCHAR},#{item.lng,jdbcType=DECIMAL},#{item.lat,jdbcType=DECIMAL},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.wxUid,jdbcType=INTEGER},#{item.country,jdbcType=VARCHAR},#{item.province,jdbcType=VARCHAR},#{item.city,jdbcType=VARCHAR},#{item.countyId,jdbcType=INTEGER},#{item.detailAddr,jdbcType=VARCHAR},#{item.lng,jdbcType=DOUBLE},#{item.lat,jdbcType=DOUBLE},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -136,10 +136,10 @@
 				and detail_addr = #{detailAddr,jdbcType=VARCHAR}
 			</if>
 			<if test="lng != null" >
-				and lng = #{lng,jdbcType=DECIMAL}
+				and lng = #{lng,jdbcType=DOUBLE}
 			</if>
 			<if test="lat != null" >
-				and lat = #{lat,jdbcType=DECIMAL}
+				and lat = #{lat,jdbcType=DOUBLE}
 			</if>
 			<!--<if test="queryParam != null">
 				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">

@@ -16,8 +16,8 @@
     <result column="city_id" property="cityId" jdbcType="INTEGER" />
     <result column="county_id" property="countyId" jdbcType="INTEGER" />
     <result column="detail_addr" property="detailAddr" jdbcType="VARCHAR" />
-    <result column="lng" property="lng" jdbcType="DECIMAL" />
-    <result column="lat" property="lat" jdbcType="DECIMAL" />
+    <result column="lng" property="lng" jdbcType="DOUBLE" />
+    <result column="lat" property="lat" jdbcType="DOUBLE" />
     <result column="wx_uid" property="wxUid" jdbcType="INTEGER" />
     <result column="snapshot" property="snapshot" jdbcType="VARCHAR" />
     <result column="check_state" property="checkState" jdbcType="CHAR" />
@@ -52,8 +52,8 @@
       #{logo,jdbcType=VARCHAR}, #{indId,jdbcType=INTEGER}, #{subIndId,jdbcType=INTEGER}, 
       #{mgrName,jdbcType=VARCHAR}, #{kefu,jdbcType=VARCHAR}, #{licence,jdbcType=VARCHAR}, 
       #{defBgImg,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, 
-      #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, #{lng,jdbcType=DECIMAL}, 
-      #{lat,jdbcType=DECIMAL}, #{wxUid,jdbcType=INTEGER}, #{snapshot,jdbcType=VARCHAR}, 
+      #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, #{lng,jdbcType=DOUBLE}, 
+      #{lat,jdbcType=DOUBLE}, #{wxUid,jdbcType=INTEGER}, #{snapshot,jdbcType=VARCHAR}, 
       #{checkState,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -100,10 +100,10 @@
         detail_addr = #{detailAddr,jdbcType=VARCHAR},
       </if>
       <if test="lng != null" >
-        lng = #{lng,jdbcType=DECIMAL},
+        lng = #{lng,jdbcType=DOUBLE},
       </if>
       <if test="lat != null" >
-        lat = #{lat,jdbcType=DECIMAL},
+        lat = #{lat,jdbcType=DOUBLE},
       </if>
       <if test="wxUid != null" >
         wx_uid = #{wxUid,jdbcType=INTEGER},
@@ -136,8 +136,8 @@
       #{logo,jdbcType=VARCHAR}, #{indId,jdbcType=INTEGER}, #{subIndId,jdbcType=INTEGER}, 
       #{mgrName,jdbcType=VARCHAR}, #{kefu,jdbcType=VARCHAR}, #{licence,jdbcType=VARCHAR}, 
       #{defBgImg,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, 
-      #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, #{lng,jdbcType=DECIMAL}, 
-      #{lat,jdbcType=DECIMAL}, #{wxUid,jdbcType=INTEGER}, #{snapshot,jdbcType=VARCHAR}, 
+      #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, #{lng,jdbcType=DOUBLE}, 
+      #{lat,jdbcType=DOUBLE}, #{wxUid,jdbcType=INTEGER}, #{snapshot,jdbcType=VARCHAR}, 
       #{checkState,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -146,7 +146,7 @@
 		(id,full_name,alias,logo,ind_id,sub_ind_id,mgr_name,kefu,licence,def_bg_img,province_id,city_id,county_id,detail_addr,lng,lat,wx_uid,snapshot,check_state,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.id,jdbcType=INTEGER},#{item.fullName,jdbcType=VARCHAR},#{item.alias,jdbcType=VARCHAR},#{item.logo,jdbcType=VARCHAR},#{item.indId,jdbcType=INTEGER},#{item.subIndId,jdbcType=INTEGER},#{item.mgrName,jdbcType=VARCHAR},#{item.kefu,jdbcType=VARCHAR},#{item.licence,jdbcType=VARCHAR},#{item.defBgImg,jdbcType=VARCHAR},#{item.provinceId,jdbcType=INTEGER},#{item.cityId,jdbcType=INTEGER},#{item.countyId,jdbcType=INTEGER},#{item.detailAddr,jdbcType=VARCHAR},#{item.lng,jdbcType=DECIMAL},#{item.lat,jdbcType=DECIMAL},#{item.wxUid,jdbcType=INTEGER},#{item.snapshot,jdbcType=VARCHAR},#{item.checkState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.id,jdbcType=INTEGER},#{item.fullName,jdbcType=VARCHAR},#{item.alias,jdbcType=VARCHAR},#{item.logo,jdbcType=VARCHAR},#{item.indId,jdbcType=INTEGER},#{item.subIndId,jdbcType=INTEGER},#{item.mgrName,jdbcType=VARCHAR},#{item.kefu,jdbcType=VARCHAR},#{item.licence,jdbcType=VARCHAR},#{item.defBgImg,jdbcType=VARCHAR},#{item.provinceId,jdbcType=INTEGER},#{item.cityId,jdbcType=INTEGER},#{item.countyId,jdbcType=INTEGER},#{item.detailAddr,jdbcType=VARCHAR},#{item.lng,jdbcType=DOUBLE},#{item.lat,jdbcType=DOUBLE},#{item.wxUid,jdbcType=INTEGER},#{item.snapshot,jdbcType=VARCHAR},#{item.checkState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -222,10 +222,10 @@
 				and detail_addr = #{detailAddr,jdbcType=VARCHAR}
 			</if>
 			<if test="lng != null" >
-				and lng = #{lng,jdbcType=DECIMAL}
+				and lng = #{lng,jdbcType=DOUBLE}
 			</if>
 			<if test="lat != null" >
-				and lat = #{lat,jdbcType=DECIMAL}
+				and lat = #{lat,jdbcType=DOUBLE}
 			</if>
 			<if test="wxUid != null and wxUid > 0" >
 				and wx_uid = #{wxUid,jdbcType=INTEGER}

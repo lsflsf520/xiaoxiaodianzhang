@@ -2,15 +2,14 @@ package com.fengshang.xiaodianbao.wallet.entity;
 
 import com.xyz.tools.common.constant.CommonStatus;
 import com.xyz.tools.db.bean.BaseEntity;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Wallet extends BaseEntity<Integer> {
     private Integer wxUid;
 
-    private BigDecimal balance;
+    private Double balance;
 
-    private BigDecimal totalChargeAmount;
+    private Double totalChargeAmount;
 
     private CommonStatus status;
 
@@ -26,19 +25,19 @@ public class Wallet extends BaseEntity<Integer> {
         this.wxUid = wxUid;
     }
 
-    public BigDecimal getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
-    public BigDecimal getTotalChargeAmount() {
+    public Double getTotalChargeAmount() {
         return totalChargeAmount;
     }
 
-    public void setTotalChargeAmount(BigDecimal totalChargeAmount) {
+    public void setTotalChargeAmount(Double totalChargeAmount) {
         this.totalChargeAmount = totalChargeAmount;
     }
 

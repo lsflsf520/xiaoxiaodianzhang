@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.wallet.entity.ChargeLog" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="wx_uid" property="wxUid" jdbcType="INTEGER" />
-    <result column="charge_amount" property="chargeAmount" jdbcType="DECIMAL" />
-    <result column="pre_amount" property="preAmount" jdbcType="DECIMAL" />
+    <result column="charge_amount" property="chargeAmount" jdbcType="DOUBLE" />
+    <result column="pre_amount" property="preAmount" jdbcType="DOUBLE" />
     <result column="pay_method" property="payMethod" jdbcType="CHAR" />
     <result column="third_trade_id" property="thirdTradeId" jdbcType="VARCHAR" />
     <result column="third_payment_no" property="thirdPaymentNo" jdbcType="VARCHAR" />
@@ -33,8 +33,8 @@
       pre_amount, pay_method, third_trade_id, 
       third_payment_no, snapshot, ord_state, 
       create_time, last_uptime)
-    values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{chargeAmount,jdbcType=DECIMAL}, 
-      #{preAmount,jdbcType=DECIMAL}, #{payMethod,jdbcType=CHAR}, #{thirdTradeId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{chargeAmount,jdbcType=DOUBLE}, 
+      #{preAmount,jdbcType=DOUBLE}, #{payMethod,jdbcType=CHAR}, #{thirdTradeId,jdbcType=VARCHAR}, 
       #{thirdPaymentNo,jdbcType=VARCHAR}, #{snapshot,jdbcType=VARCHAR}, #{ordState,jdbcType=CHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
   </insert>
@@ -45,10 +45,10 @@
         wx_uid = #{wxUid,jdbcType=INTEGER},
       </if>
       <if test="chargeAmount != null" >
-        charge_amount = #{chargeAmount,jdbcType=DECIMAL},
+        charge_amount = #{chargeAmount,jdbcType=DOUBLE},
       </if>
       <if test="preAmount != null" >
-        pre_amount = #{preAmount,jdbcType=DECIMAL},
+        pre_amount = #{preAmount,jdbcType=DOUBLE},
       </if>
       <if test="payMethod != null" >
         pay_method = #{payMethod,jdbcType=CHAR},
@@ -79,8 +79,8 @@
       pre_amount, pay_method, third_trade_id, 
       third_payment_no, snapshot, ord_state, 
       create_time, last_uptime)
-    values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{chargeAmount,jdbcType=DECIMAL}, 
-      #{preAmount,jdbcType=DECIMAL}, #{payMethod,jdbcType=CHAR}, #{thirdTradeId,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{chargeAmount,jdbcType=DOUBLE}, 
+      #{preAmount,jdbcType=DOUBLE}, #{payMethod,jdbcType=CHAR}, #{thirdTradeId,jdbcType=VARCHAR}, 
       #{thirdPaymentNo,jdbcType=VARCHAR}, #{snapshot,jdbcType=VARCHAR}, #{ordState,jdbcType=CHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
   </insert>
@@ -89,7 +89,7 @@
 		(id,wx_uid,charge_amount,pre_amount,pay_method,third_trade_id,third_payment_no,snapshot,ord_state,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.id,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.chargeAmount,jdbcType=DECIMAL},#{item.preAmount,jdbcType=DECIMAL},#{item.payMethod,jdbcType=CHAR},#{item.thirdTradeId,jdbcType=VARCHAR},#{item.thirdPaymentNo,jdbcType=VARCHAR},#{item.snapshot,jdbcType=VARCHAR},#{item.ordState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.id,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.chargeAmount,jdbcType=DOUBLE},#{item.preAmount,jdbcType=DOUBLE},#{item.payMethod,jdbcType=CHAR},#{item.thirdTradeId,jdbcType=VARCHAR},#{item.thirdPaymentNo,jdbcType=VARCHAR},#{item.snapshot,jdbcType=VARCHAR},#{item.ordState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -129,10 +129,10 @@
 				and wx_uid = #{wxUid,jdbcType=INTEGER}
 			</if>
 			<if test="chargeAmount != null" >
-				and charge_amount = #{chargeAmount,jdbcType=DECIMAL}
+				and charge_amount = #{chargeAmount,jdbcType=DOUBLE}
 			</if>
 			<if test="preAmount != null" >
-				and pre_amount = #{preAmount,jdbcType=DECIMAL}
+				and pre_amount = #{preAmount,jdbcType=DOUBLE}
 			</if>
 			<if test="payMethod != null" >
 				and pay_method = #{payMethod,jdbcType=CHAR}

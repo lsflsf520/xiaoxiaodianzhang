@@ -6,8 +6,8 @@
     <result column="coupon_type" property="couponType" jdbcType="CHAR" />
     <result column="tmpl_file_name" property="tmplFileName" jdbcType="VARCHAR" />
     <result column="discount_type" property="discountType" jdbcType="CHAR" />
-    <result column="discount" property="discount" jdbcType="DECIMAL" />
-    <result column="min_amount" property="minAmount" jdbcType="DECIMAL" />
+    <result column="discount" property="discount" jdbcType="DOUBLE" />
+    <result column="min_amount" property="minAmount" jdbcType="DOUBLE" />
     <result column="day_limit_num" property="dayLimitNum" jdbcType="INTEGER" />
     <result column="person_limit_num" property="personLimitNum" jdbcType="INTEGER" />
     <result column="effect_day" property="effectDay" jdbcType="INTEGER" />
@@ -42,7 +42,7 @@
       remark, status, create_time, 
       last_uptime)
     values (#{id,jdbcType=INTEGER}, #{couponType,jdbcType=CHAR}, #{tmplFileName,jdbcType=VARCHAR}, 
-      #{discountType,jdbcType=CHAR}, #{discount,jdbcType=DECIMAL}, #{minAmount,jdbcType=DECIMAL}, 
+      #{discountType,jdbcType=CHAR}, #{discount,jdbcType=DOUBLE}, #{minAmount,jdbcType=DOUBLE}, 
       #{dayLimitNum,jdbcType=INTEGER}, #{personLimitNum,jdbcType=INTEGER}, #{effectDay,jdbcType=INTEGER}, 
       #{onlinePay,jdbcType=CHAR}, #{effectAfterRecvDay,jdbcType=INTEGER}, #{canUseTime,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
@@ -61,10 +61,10 @@
         discount_type = #{discountType,jdbcType=CHAR},
       </if>
       <if test="discount != null" >
-        discount = #{discount,jdbcType=DECIMAL},
+        discount = #{discount,jdbcType=DOUBLE},
       </if>
       <if test="minAmount != null" >
-        min_amount = #{minAmount,jdbcType=DECIMAL},
+        min_amount = #{minAmount,jdbcType=DOUBLE},
       </if>
       <if test="dayLimitNum != null" >
         day_limit_num = #{dayLimitNum,jdbcType=INTEGER},
@@ -107,7 +107,7 @@
       remark, status, create_time, 
       last_uptime)
     values (#{id,jdbcType=INTEGER}, #{couponType,jdbcType=CHAR}, #{tmplFileName,jdbcType=VARCHAR}, 
-      #{discountType,jdbcType=CHAR}, #{discount,jdbcType=DECIMAL}, #{minAmount,jdbcType=DECIMAL}, 
+      #{discountType,jdbcType=CHAR}, #{discount,jdbcType=DOUBLE}, #{minAmount,jdbcType=DOUBLE}, 
       #{dayLimitNum,jdbcType=INTEGER}, #{personLimitNum,jdbcType=INTEGER}, #{effectDay,jdbcType=INTEGER}, 
       #{onlinePay,jdbcType=CHAR}, #{effectAfterRecvDay,jdbcType=INTEGER}, #{canUseTime,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
@@ -118,7 +118,7 @@
 		(id,coupon_type,tmpl_file_name,discount_type,discount,min_amount,day_limit_num,person_limit_num,effect_day,online_pay,effect_after_recv_day,can_use_time,remark,status,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.id,jdbcType=INTEGER},#{item.couponType,jdbcType=CHAR},#{item.tmplFileName,jdbcType=VARCHAR},#{item.discountType,jdbcType=CHAR},#{item.discount,jdbcType=DECIMAL},#{item.minAmount,jdbcType=DECIMAL},#{item.dayLimitNum,jdbcType=INTEGER},#{item.personLimitNum,jdbcType=INTEGER},#{item.effectDay,jdbcType=INTEGER},#{item.onlinePay,jdbcType=CHAR},#{item.effectAfterRecvDay,jdbcType=INTEGER},#{item.canUseTime,jdbcType=VARCHAR},#{item.remark,jdbcType=VARCHAR},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.id,jdbcType=INTEGER},#{item.couponType,jdbcType=CHAR},#{item.tmplFileName,jdbcType=VARCHAR},#{item.discountType,jdbcType=CHAR},#{item.discount,jdbcType=DOUBLE},#{item.minAmount,jdbcType=DOUBLE},#{item.dayLimitNum,jdbcType=INTEGER},#{item.personLimitNum,jdbcType=INTEGER},#{item.effectDay,jdbcType=INTEGER},#{item.onlinePay,jdbcType=CHAR},#{item.effectAfterRecvDay,jdbcType=INTEGER},#{item.canUseTime,jdbcType=VARCHAR},#{item.remark,jdbcType=VARCHAR},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -164,10 +164,10 @@
 				and discount_type = #{discountType,jdbcType=CHAR}
 			</if>
 			<if test="discount != null" >
-				and discount = #{discount,jdbcType=DECIMAL}
+				and discount = #{discount,jdbcType=DOUBLE}
 			</if>
 			<if test="minAmount != null" >
-				and min_amount = #{minAmount,jdbcType=DECIMAL}
+				and min_amount = #{minAmount,jdbcType=DOUBLE}
 			</if>
 			<if test="dayLimitNum != null and dayLimitNum > 0" >
 				and day_limit_num = #{dayLimitNum,jdbcType=INTEGER}

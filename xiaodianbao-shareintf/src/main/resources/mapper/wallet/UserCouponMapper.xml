@@ -9,8 +9,8 @@
     <result column="coupon_type" property="couponType" jdbcType="CHAR" />
     <result column="tmpl_file_name" property="tmplFileName" jdbcType="VARCHAR" />
     <result column="discount_type" property="discountType" jdbcType="CHAR" />
-    <result column="discount" property="discount" jdbcType="DECIMAL" />
-    <result column="min_amount" property="minAmount" jdbcType="DECIMAL" />
+    <result column="discount" property="discount" jdbcType="DOUBLE" />
+    <result column="min_amount" property="minAmount" jdbcType="DOUBLE" />
     <result column="online_pay" property="onlinePay" jdbcType="CHAR" />
     <result column="uneffect_time" property="uneffectTime" jdbcType="TIMESTAMP" />
     <result column="effect_time" property="effectTime" jdbcType="TIMESTAMP" />
@@ -44,7 +44,7 @@
       create_time, last_uptime)
     values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
       #{srcCode,jdbcType=VARCHAR}, #{couponType,jdbcType=CHAR}, #{tmplFileName,jdbcType=VARCHAR}, 
-      #{discountType,jdbcType=CHAR}, #{discount,jdbcType=DECIMAL}, #{minAmount,jdbcType=DECIMAL}, 
+      #{discountType,jdbcType=CHAR}, #{discount,jdbcType=DOUBLE}, #{minAmount,jdbcType=DOUBLE}, 
       #{onlinePay,jdbcType=CHAR}, #{uneffectTime,jdbcType=TIMESTAMP}, #{effectTime,jdbcType=TIMESTAMP}, 
       #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{couponState,jdbcType=CHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
@@ -71,10 +71,10 @@
         discount_type = #{discountType,jdbcType=CHAR},
       </if>
       <if test="discount != null" >
-        discount = #{discount,jdbcType=DECIMAL},
+        discount = #{discount,jdbcType=DOUBLE},
       </if>
       <if test="minAmount != null" >
-        min_amount = #{minAmount,jdbcType=DECIMAL},
+        min_amount = #{minAmount,jdbcType=DOUBLE},
       </if>
       <if test="onlinePay != null" >
         online_pay = #{onlinePay,jdbcType=CHAR},
@@ -112,7 +112,7 @@
       create_time, last_uptime)
     values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
       #{srcCode,jdbcType=VARCHAR}, #{couponType,jdbcType=CHAR}, #{tmplFileName,jdbcType=VARCHAR}, 
-      #{discountType,jdbcType=CHAR}, #{discount,jdbcType=DECIMAL}, #{minAmount,jdbcType=DECIMAL}, 
+      #{discountType,jdbcType=CHAR}, #{discount,jdbcType=DOUBLE}, #{minAmount,jdbcType=DOUBLE}, 
       #{onlinePay,jdbcType=CHAR}, #{uneffectTime,jdbcType=TIMESTAMP}, #{effectTime,jdbcType=TIMESTAMP}, 
       #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{couponState,jdbcType=CHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
@@ -122,7 +122,7 @@
 		(id,wx_uid,shop_id,src_code,coupon_type,tmpl_file_name,discount_type,discount,min_amount,online_pay,uneffect_time,effect_time,can_use_time,remark,coupon_state,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.id,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.shopId,jdbcType=INTEGER},#{item.srcCode,jdbcType=VARCHAR},#{item.couponType,jdbcType=CHAR},#{item.tmplFileName,jdbcType=VARCHAR},#{item.discountType,jdbcType=CHAR},#{item.discount,jdbcType=DECIMAL},#{item.minAmount,jdbcType=DECIMAL},#{item.onlinePay,jdbcType=CHAR},#{item.uneffectTime,jdbcType=TIMESTAMP},#{item.effectTime,jdbcType=TIMESTAMP},#{item.canUseTime,jdbcType=VARCHAR},#{item.remark,jdbcType=VARCHAR},#{item.couponState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.id,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.shopId,jdbcType=INTEGER},#{item.srcCode,jdbcType=VARCHAR},#{item.couponType,jdbcType=CHAR},#{item.tmplFileName,jdbcType=VARCHAR},#{item.discountType,jdbcType=CHAR},#{item.discount,jdbcType=DOUBLE},#{item.minAmount,jdbcType=DOUBLE},#{item.onlinePay,jdbcType=CHAR},#{item.uneffectTime,jdbcType=TIMESTAMP},#{item.effectTime,jdbcType=TIMESTAMP},#{item.canUseTime,jdbcType=VARCHAR},#{item.remark,jdbcType=VARCHAR},#{item.couponState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -177,10 +177,10 @@
 				and discount_type = #{discountType,jdbcType=CHAR}
 			</if>
 			<if test="discount != null" >
-				and discount = #{discount,jdbcType=DECIMAL}
+				and discount = #{discount,jdbcType=DOUBLE}
 			</if>
 			<if test="minAmount != null" >
-				and min_amount = #{minAmount,jdbcType=DECIMAL}
+				and min_amount = #{minAmount,jdbcType=DOUBLE}
 			</if>
 			<if test="onlinePay != null and onlinePay != ''" >
 				and online_pay = #{onlinePay,jdbcType=CHAR}
