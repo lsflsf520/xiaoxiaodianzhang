@@ -3,18 +3,21 @@
 <mapper namespace="com.fengshang.xiaodianbao.uc.dao.WxUserExtraDao" >
   <resultMap id="BaseResultMap" type="com.fengshang.xiaodianbao.uc.entity.WxUserExtra" >
     <id column="wx_uid" property="wxUid" jdbcType="INTEGER" />
-    <result column="country" property="country" jdbcType="VARCHAR" />
-    <result column="province" property="province" jdbcType="VARCHAR" />
-    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="country_id" property="countryId" jdbcType="INTEGER" />
+    <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
     <result column="county_id" property="countyId" jdbcType="INTEGER" />
     <result column="detail_addr" property="detailAddr" jdbcType="VARCHAR" />
     <result column="lng" property="lng" jdbcType="DOUBLE" />
     <result column="lat" property="lat" jdbcType="DOUBLE" />
+    <result column="serv_msg" property="servMsg" jdbcType="CHAR" />
+    <result column="sms_msg" property="smsMsg" jdbcType="CHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="last_uptime" property="lastUptime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="BaseColumnList" >
-    wx_uid, country, province, city, county_id, detail_addr, lng, lat, create_time, last_uptime
+    wx_uid, country_id, province_id, city_id, county_id, detail_addr, lng, lat, serv_msg, 
+    sms_msg, create_time, last_uptime
   </sql>
   <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,26 +30,26 @@
     where wx_uid = #{wxUid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.fengshang.xiaodianbao.uc.entity.WxUserExtra" >
-    insert into wx_user_extra (wx_uid, country, province, 
-      city, county_id, detail_addr, 
-      lng, lat, create_time, 
-      last_uptime)
-    values (#{wxUid,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
-      #{city,jdbcType=VARCHAR}, #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, 
-      #{lng,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{lastUptime,jdbcType=TIMESTAMP})
+    insert into wx_user_extra (wx_uid, country_id, province_id, 
+      city_id, county_id, detail_addr, 
+      lng, lat, serv_msg, sms_msg, 
+      create_time, last_uptime)
+    values (#{wxUid,jdbcType=INTEGER}, #{countryId,jdbcType=INTEGER}, #{provinceId,jdbcType=INTEGER}, 
+      #{cityId,jdbcType=INTEGER}, #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, 
+      #{lng,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE}, #{servMsg,jdbcType=CHAR}, #{smsMsg,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
   </insert>
   <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.uc.entity.WxUserExtra" >
     update wx_user_extra
     <set >
-      <if test="country != null" >
-        country = #{country,jdbcType=VARCHAR},
+      <if test="countryId != null" >
+        country_id = #{countryId,jdbcType=INTEGER},
       </if>
-      <if test="province != null" >
-        province = #{province,jdbcType=VARCHAR},
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=INTEGER},
       </if>
-      <if test="city != null" >
-        city = #{city,jdbcType=VARCHAR},
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=INTEGER},
       </if>
       <if test="countyId != null" >
         county_id = #{countyId,jdbcType=INTEGER},
@@ -60,6 +63,12 @@
       <if test="lat != null" >
         lat = #{lat,jdbcType=DOUBLE},
       </if>
+      <if test="servMsg != null" >
+        serv_msg = #{servMsg,jdbcType=CHAR},
+      </if>
+      <if test="smsMsg != null" >
+        sms_msg = #{smsMsg,jdbcType=CHAR},
+      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -70,21 +79,21 @@
     where wx_uid = #{wxUid,jdbcType=INTEGER}
   </update>
   <insert id="insertReturnPK" useGeneratedKeys="true" keyProperty="wxUid" parameterType="com.fengshang.xiaodianbao.uc.entity.WxUserExtra" >
-    insert into wx_user_extra (wx_uid, country, province, 
-      city, county_id, detail_addr, 
-      lng, lat, create_time, 
-      last_uptime)
-    values (#{wxUid,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
-      #{city,jdbcType=VARCHAR}, #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, 
-      #{lng,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{lastUptime,jdbcType=TIMESTAMP})
+    insert into wx_user_extra (wx_uid, country_id, province_id, 
+      city_id, county_id, detail_addr, 
+      lng, lat, serv_msg, sms_msg, 
+      create_time, last_uptime)
+    values (#{wxUid,jdbcType=INTEGER}, #{countryId,jdbcType=INTEGER}, #{provinceId,jdbcType=INTEGER}, 
+      #{cityId,jdbcType=INTEGER}, #{countyId,jdbcType=INTEGER}, #{detailAddr,jdbcType=VARCHAR}, 
+      #{lng,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE}, #{servMsg,jdbcType=CHAR}, #{smsMsg,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertBatch" parameterType="java.util.List" >
     insert into wx_user_extra
-		(wx_uid,country,province,city,county_id,detail_addr,lng,lat,create_time,last_uptime)
+		(wx_uid,country_id,province_id,city_id,county_id,detail_addr,lng,lat,serv_msg,sms_msg,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.wxUid,jdbcType=INTEGER},#{item.country,jdbcType=VARCHAR},#{item.province,jdbcType=VARCHAR},#{item.city,jdbcType=VARCHAR},#{item.countyId,jdbcType=INTEGER},#{item.detailAddr,jdbcType=VARCHAR},#{item.lng,jdbcType=DOUBLE},#{item.lat,jdbcType=DOUBLE},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.wxUid,jdbcType=INTEGER},#{item.countryId,jdbcType=INTEGER},#{item.provinceId,jdbcType=INTEGER},#{item.cityId,jdbcType=INTEGER},#{item.countyId,jdbcType=INTEGER},#{item.detailAddr,jdbcType=VARCHAR},#{item.lng,jdbcType=DOUBLE},#{item.lat,jdbcType=DOUBLE},#{item.servMsg,jdbcType=CHAR},#{item.smsMsg,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -120,14 +129,14 @@
 			<if test="wxUid != null and wxUid > 0" >
 				and wx_uid = #{wxUid,jdbcType=INTEGER}
 			</if>
-			<if test="country != null and country != ''" >
-				and country = #{country,jdbcType=VARCHAR}
+			<if test="countryId != null and countryId > 0" >
+				and country_id = #{countryId,jdbcType=INTEGER}
 			</if>
-			<if test="province != null and province != ''" >
-				and province = #{province,jdbcType=VARCHAR}
+			<if test="provinceId != null and provinceId > 0" >
+				and province_id = #{provinceId,jdbcType=INTEGER}
 			</if>
-			<if test="city != null and city != ''" >
-				and city = #{city,jdbcType=VARCHAR}
+			<if test="cityId != null and cityId > 0" >
+				and city_id = #{cityId,jdbcType=INTEGER}
 			</if>
 			<if test="countyId != null and countyId > 0" >
 				and county_id = #{countyId,jdbcType=INTEGER}
@@ -135,11 +144,11 @@
 			<if test="detailAddr != null and detailAddr != ''" >
 				and detail_addr = #{detailAddr,jdbcType=VARCHAR}
 			</if>
-			<if test="lng != null" >
-				and lng = #{lng,jdbcType=DOUBLE}
+			<if test="servMsg != null" >
+				and serv_msg = #{servMsg,jdbcType=CHAR}
 			</if>
-			<if test="lat != null" >
-				and lat = #{lat,jdbcType=DOUBLE}
+			<if test="smsMsg != null" >
+				and sms_msg = #{smsMsg,jdbcType=CHAR}
 			</if>
 			<!--<if test="queryParam != null">
 				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">

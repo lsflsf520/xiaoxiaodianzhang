@@ -12,6 +12,7 @@
           <property name="locations">
                 <array>
                         <value>classpath:application.properties</value>
+                        <value>classpath:redis.properties</value>
                 </array>
           </property>
     </bean>

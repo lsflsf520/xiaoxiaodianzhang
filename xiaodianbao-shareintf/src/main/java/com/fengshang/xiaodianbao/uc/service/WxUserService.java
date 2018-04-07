@@ -4,12 +4,15 @@ import com.fengshang.xiaodianbao.uc.dao.WxUserDao;
 import com.fengshang.xiaodianbao.uc.entity.WxUser;
 import com.xyz.tools.common.constant.CommonStatus;
 import com.xyz.tools.common.exception.BaseRuntimeException;
+import com.xyz.tools.db.bean.PageData;
 import com.xyz.tools.db.dao.IBaseDao;
 import com.xyz.tools.db.service.AbstractBaseService;
 
 import java.util.Date;
 
 import javax.annotation.Resource;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -48,4 +51,14 @@ public class WxUserService extends AbstractBaseService<Integer, WxUser> {
     	    
     	    return this.findOne(query);
     }
+    
+    @Override
+    public PageData<WxUser> findByPage(WxUser t) {
+
+        if (StringUtils.isBlank(t.getOrdseg())) {
+            t.setOrdseg("create_time.desc");
+        }
+        return super.findByPage(t);
+    }
+    
 }

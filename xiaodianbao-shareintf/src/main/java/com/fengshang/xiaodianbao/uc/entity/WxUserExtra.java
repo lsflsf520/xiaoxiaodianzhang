@@ -1,111 +1,133 @@
 package com.fengshang.xiaodianbao.uc.entity;
 
-import com.xyz.tools.db.bean.BaseEntity;
 import java.util.Date;
 
+import com.xyz.tools.common.constant.Bool;
+import com.xyz.tools.db.bean.BaseEntity;
+
 public class WxUserExtra extends BaseEntity<Integer> {
-    private Integer wxUid;
+	private Integer wxUid;
 
-    private String country;
+	private Integer countryId;
 
-    private String province;
+	private Integer provinceId;
 
-    private String city;
+	private Integer cityId;
 
-    private Integer countyId;
+	private Integer countyId;
 
-    private String detailAddr;
+	private String detailAddr;
 
-    private Double lng;
+	private Double lng;
 
-    private Double lat;
+	private Double lat;
 
-    private Date createTime;
+	private Bool servMsg;
 
-    private Date lastUptime;
+	private Bool smsMsg;
 
-    public Integer getWxUid() {
-        return wxUid;
-    }
+	private Date createTime;
 
-    public void setWxUid(Integer wxUid) {
-        this.wxUid = wxUid;
-    }
+	private Date lastUptime;
 
-    public String getCountry() {
-        return country;
-    }
+	public Integer getWxUid() {
+		return wxUid;
+	}
 
-    public void setCountry(String country) {
-        this.country = country == null ? null : country.trim();
-    }
+	public void setWxUid(Integer wxUid) {
+		this.wxUid = wxUid;
+	}
 
-    public String getProvince() {
-        return province;
-    }
+	public Integer getCountryId() {
+		return countryId;
+	}
 
-    public void setProvince(String province) {
-        this.province = province == null ? null : province.trim();
-    }
+	public void setCountryId(Integer countryId) {
+		this.countryId = countryId;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public Integer getProvinceId() {
+		return provinceId;
+	}
 
-    public void setCity(String city) {
-        this.city = city == null ? null : city.trim();
-    }
+	public void setProvinceId(Integer provinceId) {
+		this.provinceId = provinceId;
+	}
 
-    public Integer getCountyId() {
-        return countyId;
-    }
+	public Integer getCityId() {
+		return cityId;
+	}
 
-    public void setCountyId(Integer countyId) {
-        this.countyId = countyId;
-    }
+	public void setCityId(Integer cityId) {
+		this.cityId = cityId;
+	}
 
-    public String getDetailAddr() {
-        return detailAddr;
-    }
+	public Integer getCountyId() {
+		return countyId;
+	}
 
-    public void setDetailAddr(String detailAddr) {
-        this.detailAddr = detailAddr == null ? null : detailAddr.trim();
-    }
+	public void setCountyId(Integer countyId) {
+		this.countyId = countyId;
+	}
 
-    public Double getLng() {
-        return lng;
-    }
+	public String getDetailAddr() {
+		return detailAddr;
+	}
 
-    public void setLng(Double lng) {
-        this.lng = lng;
-    }
+	public void setDetailAddr(String detailAddr) {
+		this.detailAddr = detailAddr == null ? null : detailAddr.trim();
+	}
 
-    public Double getLat() {
-        return lat;
-    }
+	public Double getLng() {
+		return lng;
+	}
 
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
+	public void setLng(Double lng) {
+		this.lng = lng;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public Double getLat() {
+		return lat;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setLat(Double lat) {
+		this.lat = lat;
+	}
 
-    public Date getLastUptime() {
-        return lastUptime;
-    }
+	public Bool getServMsg() {
+		return servMsg;
+	}
 
-    public void setLastUptime(Date lastUptime) {
-        this.lastUptime = lastUptime;
-    }
+	public void setServMsg(Bool servMsg) {
+		this.servMsg = servMsg;
+	}
 
-    @Override
-    public Integer getPK() {
-        return wxUid;
-    }
+	public Bool getSmsMsg() {
+		return smsMsg;
+	}
+
+	public void setSmsMsg(Bool smsMsg) {
+		this.smsMsg = smsMsg;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getLastUptime() {
+		return lastUptime;
+	}
+
+	public void setLastUptime(Date lastUptime) {
+		this.lastUptime = lastUptime;
+	}
+
+	@Override
+	public Integer getPK() {
+		return wxUid;
+	}
 }

@@ -3,9 +3,9 @@
 <configuration scan="false">
 
     <property name="logBaseDir" value="./logs" />
-    <property name="logName" value="web-h5" />
-    <conversionRule conversionWord="ip" converterClass="com.ujigu.secure.common.log.IPConverter" />
-    <conversionRule conversionWord="tid" converterClass="com.ujigu.secure.common.log.TraceIdConverter" />
+    <property name="logName" value="web-xiaodianbao" />
+    <conversionRule conversionWord="ip" converterClass="com.xyz.tools.common.log.IPConverter" />
+    <conversionRule conversionWord="tid" converterClass="com.xyz.tools.common.log.TraceIdConverter" />
     
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<Encoding>UTF-8</Encoding>
@@ -66,7 +66,7 @@
       <appender-ref ref="OPER_LOG" />
     </logger>
     
-	<logger name="com.ujigu.secure" level="debug" additivity="false">
+	<logger name="com.fengshang.xiaodianbao" level="debug" additivity="false">
 	  <appender-ref ref="STDOUT" />
 	  <appender-ref ref="SYS_LOG" />
 	</logger>

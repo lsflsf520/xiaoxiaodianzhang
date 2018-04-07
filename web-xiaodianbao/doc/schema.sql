@@ -46,7 +46,6 @@ create table wx_user(
 
 create unique index openid_ind on wx_user(open_id);
 
-drop table if exists wx_user_extra;
 create table wx_user_extra(
   `wx_uid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'wx_user表的id',
   `country` varchar(64) comment '国家',
@@ -56,6 +55,8 @@ create table wx_user_extra(
   `detail_addr` varchar(200) comment '详细街道门牌号地址',
   `lng` double(10,7) comment '经度',
   `lat` double(10,7) comment '纬度',
+  `serv_msg` enum('Y', 'N') not null default 'Y' comment '是否订阅服务号消息',
+  `sms_msg` enum('Y', 'N') not null default 'Y' comment '是否订短信消息',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建时间',
   `last_uptime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最近一次更新时间',
   PRIMARY KEY (`wx_uid`)

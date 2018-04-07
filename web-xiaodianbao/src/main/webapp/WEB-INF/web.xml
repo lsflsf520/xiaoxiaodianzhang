@@ -10,6 +10,7 @@
             classpath:/context/spring-dataSource.xml
             classpath:/context/spring-persist.xml 
             classpath:/context/spring-dict.xml
+            classpath:/context/spring-redis.xml
         </param-value>
 	</context-param>
 	

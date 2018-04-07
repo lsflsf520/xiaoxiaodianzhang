@@ -85,25 +85,11 @@
 		<property name="maxInMemorySize" value="2048" />
 	</bean>
 	
-	<!-- <bean id="excludeUrlSet" class="java.util.TreeSet">
-	  <constructor-arg>
-	    <set>
-            <value>/error/**</value>
-            <value>/data/sync/**</value>
-            <value>/sys/port/loginPage.do</value>
-            <value>/sys/port/doLogon.do</value>
-            <value>/sys/port/doLogout.do</value>
-            <value>/sys/port/loadMenu.do</value>
-            <value>/sys/port/welcome.do</value>
-        </set>
-	  </constructor-arg>
-	</bean>
-	-->
-	
 	 <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/wxuser/saveWxUser.do"/>
+            <mvc:exclude-mapping path="/uc/wxuser/dologon.do"/>
+            <mvc:exclude-mapping path="/uc/wxuser/redisTest.do"/>
             <mvc:exclude-mapping path="/base/**"/>
             <mvc:exclude-mapping path="/error/**"/>
             <mvc:exclude-mapping path="/ping/pang.do"/>
