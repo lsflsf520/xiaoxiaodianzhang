@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fengshang.xiaodianbao.base.entity.District;
 import com.fengshang.xiaodianbao.base.service.DistrictService;
+import com.fengshang.xiaodianbao.shop.service.ShopService;
 import com.fengshang.xiaodianbao.uc.entity.WxUser;
 import com.fengshang.xiaodianbao.uc.entity.WxUserExtra;
 import com.fengshang.xiaodianbao.uc.service.WxUserExtraService;
 import com.fengshang.xiaodianbao.uc.service.WxUserService;
 import com.xyz.tools.common.bean.ResultModel;
+import com.xyz.tools.common.constant.CheckState;
 import com.xyz.tools.common.constant.Sex;
 import com.xyz.tools.common.utils.LogUtils;
 import com.xyz.tools.common.utils.StringUtil;
@@ -43,6 +45,8 @@ public class WxUserController {
 	private DistrictService districtService;
 	@Resource
 	private UserLoginHelper userLoginHelper;
+	@Resource
+	private ShopService shopService;
 
 	@RequestMapping("dologon")
 	@ResponseBody
@@ -109,7 +113,9 @@ public class WxUserController {
 		WxUser wxuser = ThreadUtil.getCurrUser();
 		WxUserExtra userExtra = wxUserExtraService.findById(wxuser.getId());
 		List<District> provinces = districtService.loadByParentId(0);
+		CheckState shopState = shopService.loadMyFirstShopState(wxuser.getId());
 
-		return ResultModel.buildMapResultModel().put("extra", userExtra).put("provinces", provinces);
+		return ResultModel.buildMapResultModel().put("extra", userExtra).put("provinces", provinces).put("shopState",
+				shopState);
 	}
 }

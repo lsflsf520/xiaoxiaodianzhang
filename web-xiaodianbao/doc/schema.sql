@@ -132,10 +132,10 @@ create table shop_coupon(
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100000 DEFAULT CHARSET=utf8 COMMENT='小店设置的优惠券信息';
 
-drop table if exists shop_coupon_num;
-create table shop_coupon_num(
+drop table if exists user_coupon_num;
+create table user_coupon_num(
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '小店ID，自增长',
-  `shop_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '优惠券所属店铺ID。如果为0，则代表该券可以在wx_uid用户下的所有小店共享，否则只能在该指定的小店有效。',
+  `wx_uid` int(10) unsigned NOT NULL DEFAULT 0 COMMENT '优惠券所属用户ID。',
   `free_left_num` int default 1000 comment '免费优惠券剩余数量。每月1日凌晨0点将此值重置为1000',
   `buy_left_num` int default 0 comment '用户购买的优惠券/立减券剩余数量。默认为0',
   `buy_total_num` int default 0 comment '用户购买的优惠券/立减券总数，只增不减。默认为0',
@@ -143,7 +143,7 @@ create table shop_coupon_num(
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建时间',
   `last_uptime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最近一次更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100000 DEFAULT CHARSET=utf8 COMMENT='小店当前可用的优惠券数量';
+) ENGINE=InnoDB AUTO_INCREMENT=100000 DEFAULT CHARSET=utf8 COMMENT='用户当前可用的优惠券数量';
 
 drop table if exists shop_order;
 create table shop_order(

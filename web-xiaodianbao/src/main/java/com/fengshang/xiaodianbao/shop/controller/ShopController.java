@@ -32,9 +32,10 @@ public class ShopController {
 	@RequestMapping("doSave")
 	@ResponseBody
 	public ResultModel doSave(Shop formData) {
+		formData.setWxUid(ThreadUtil.getUidInt());
 		shopService.doSave(formData);
 
-		return new ResultModel(true);
+		return new ResultModel(formData.getId());
 	}
 
 	@RequestMapping("load/{shopId}")
@@ -45,16 +46,17 @@ public class ShopController {
 		return new ResultModel(dbData);
 	}
 
-	@RequestMapping("loadMyShopState")
+	@RequestMapping("loadMyFirstShop")
 	@ResponseBody
-	public ResultModel loadMyShopState() {
-		Shop dbData = shopService.loadMyFirstShop(ThreadUtil.getUidInt());
-
-		String state = "NON";// 没有shop
-		if (dbData != null) {
-			state = dbData.getCheckState().toString();
+	public ResultModel loadMyFirstShop(Integer shopId) {
+		Shop dbData = null;
+		if (shopId == null || shopId <= 0) {
+			dbData = shopService.loadMyFirstShop(ThreadUtil.getUidInt());
+		} else {
+			dbData = shopService.findById(shopId);
 		}
-		return ResultModel.buildMapResultModel().put("shopState", state).put("shop", dbData);
+
+		return new ResultModel(dbData);
 	}
 
 }

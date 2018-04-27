@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.fengshang.xiaodianbao.shop.dao.ShopDao;
 import com.fengshang.xiaodianbao.shop.entity.Shop;
@@ -35,7 +36,7 @@ public class ShopService extends AbstractBaseService<Integer, Shop> {
 		shop.setLastUptime(new Date());
 		if (shop.getPK() == null) {
 
-			shop.setCheckState(CheckState.PASSED);
+			shop.setCheckState(CheckState.CHECKING);
 			shop.setCreateTime(shop.getLastUptime());
 			return this.insertReturnPK(shop);
 		}
@@ -50,16 +51,43 @@ public class ShopService extends AbstractBaseService<Integer, Shop> {
 		return this.findByEntity(query, "last_uptime", Direction.DESC);
 	}
 
+	/**
+	 * 根据 审核通过、审核中、已拒绝 的先后优先级来获取自己的店铺
+	 * 
+	 * @param wxUid
+	 * @return
+	 */
 	public Shop loadMyFirstShop(int wxUid) {
 		Shop query = new Shop();
 		query.setWxUid(wxUid);
 
-		return this.findOne(query);
+		Shop checkingShop = null;
+		Shop rejectShop = null;
+		List<Shop> dbDatas = this.findByEntity(query);
+		if (!CollectionUtils.isEmpty(dbDatas)) {
+			for (Shop dbData : dbDatas) {
+				if (CheckState.PASSED.equals(dbData.getCheckState())) {
+					return dbData;
+				} else if (CheckState.CHECKING.equals(dbData.getCheckState())) {
+					checkingShop = dbData;
+				} else if (CheckState.REJECT.equals(dbData.getCheckState())) {
+					rejectShop = dbData;
+				}
+			}
+		}
+
+		return checkingShop != null ? checkingShop : (rejectShop != null ? rejectShop : null);
 	}
 
 	public Map<Integer, Shop> loadShops(Integer... shopIds) {
 		List<Shop> dbDatas = this.findByIds(shopIds);
 
 		return BeanUtils.buildPK2BeanMap(dbDatas);
+	}
+
+	public CheckState loadMyFirstShopState(int wxUid) {
+		Shop dbData = loadMyFirstShop(wxUid);
+
+		return dbData == null ? null : dbData.getCheckState();
 	}
 }
