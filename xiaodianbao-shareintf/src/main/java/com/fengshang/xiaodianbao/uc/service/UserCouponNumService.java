@@ -30,7 +30,7 @@ public class UserCouponNumService extends AbstractBaseService<Integer, UserCoupo
 	public Integer doSave(UserCouponNum userCouponNum) {
 		userCouponNum.setLastUptime(new Date());
 		if (userCouponNum.getPK() == null) {
-			userCouponNum.setCouponType(CouponType.Discount);
+			userCouponNum.setCouponType(CouponType.Diyong);
 			userCouponNum.setCreateTime(userCouponNum.getLastUptime());
 			return this.insertReturnPK(userCouponNum);
 		}

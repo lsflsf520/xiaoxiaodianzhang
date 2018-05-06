@@ -1,194 +1,216 @@
 package com.fengshang.xiaodianbao.shop.entity;
 
-import com.fengshang.xiaodianbao.constant.CouponType;
-import com.fengshang.xiaodianbao.constant.DiscountType;
-import com.xyz.tools.common.constant.CommonStatus;
-import com.xyz.tools.db.bean.BaseEntity;
 import java.util.Date;
 
+import com.fengshang.xiaodianbao.constant.CouponType;
+import com.fengshang.xiaodianbao.constant.DiscountType;
+import com.xyz.tools.common.constant.Bool;
+import com.xyz.tools.common.constant.CommonStatus;
+import com.xyz.tools.db.bean.BaseEntity;
+
 public class ShopCoupon extends BaseEntity<Integer> {
-    private Integer id;
+	private Integer id;
 
-    private Integer wxUid;
+	private Integer wxUid;
 
-    private Integer shopId;
+	private Integer shopId;
 
-    private CouponType couponType;
+	private CouponType couponType;
 
-    private String tmplFileName;
+	private String tmplFileName;
 
-    private DiscountType discountType;
+	private DiscountType discountType;
 
-    private Double discount;
+	private Double discount;
 
-    private Double minAmount;
+	private Double minAmount;
 
-    private Integer dayLimitNum;
+	private Integer dayLimitNum;
 
-    private Integer personLimitNum;
+	private Integer personLimitNum;
 
-    private Integer effectDay;
+	private Integer dayRecvLimitNum;
 
-    private String onlinePay;
+	private Integer effectDay;
 
-    private Integer effectAfterRecvDay;
+	private Bool onlinePay;
 
-    private String canUseTime;
+	private Integer effectAfterRecvDay;
 
-    private String remark;
+	private Bool useInHoliday;
 
-    private CommonStatus status;
+	private String canUseTime;
 
-    private Date createTime;
+	private String remark;
 
-    private Date lastUptime;
+	private CommonStatus status;
 
-    public Integer getId() {
-        return id;
-    }
+	private Date createTime;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	private Date lastUptime;
 
-    public Integer getWxUid() {
-        return wxUid;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setWxUid(Integer wxUid) {
-        this.wxUid = wxUid;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getShopId() {
-        return shopId;
-    }
+	public Integer getWxUid() {
+		return wxUid;
+	}
 
-    public void setShopId(Integer shopId) {
-        this.shopId = shopId;
-    }
+	public void setWxUid(Integer wxUid) {
+		this.wxUid = wxUid;
+	}
 
-    public CouponType getCouponType() {
-        return couponType;
-    }
+	public Integer getShopId() {
+		return shopId;
+	}
 
-    public void setCouponType(CouponType couponType) {
-        this.couponType = couponType;
-    }
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
 
-    public String getTmplFileName() {
-        return tmplFileName;
-    }
+	public CouponType getCouponType() {
+		return couponType;
+	}
 
-    public void setTmplFileName(String tmplFileName) {
-        this.tmplFileName = tmplFileName == null ? null : tmplFileName.trim();
-    }
+	public void setCouponType(CouponType couponType) {
+		this.couponType = couponType;
+	}
 
-    public DiscountType getDiscountType() {
-        return discountType;
-    }
+	public String getTmplFileName() {
+		return tmplFileName;
+	}
 
-    public void setDiscountType(DiscountType discountType) {
-        this.discountType = discountType;
-    }
+	public void setTmplFileName(String tmplFileName) {
+		this.tmplFileName = tmplFileName == null ? null : tmplFileName.trim();
+	}
 
-    public Double getDiscount() {
-        return discount;
-    }
+	public DiscountType getDiscountType() {
+		return discountType;
+	}
 
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
+	public void setDiscountType(DiscountType discountType) {
+		this.discountType = discountType;
+	}
 
-    public Double getMinAmount() {
-        return minAmount;
-    }
+	public Double getDiscount() {
+		return discount;
+	}
 
-    public void setMinAmount(Double minAmount) {
-        this.minAmount = minAmount;
-    }
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
 
-    public Integer getDayLimitNum() {
-        return dayLimitNum;
-    }
+	public Double getMinAmount() {
+		return minAmount;
+	}
 
-    public void setDayLimitNum(Integer dayLimitNum) {
-        this.dayLimitNum = dayLimitNum;
-    }
+	public void setMinAmount(Double minAmount) {
+		this.minAmount = minAmount;
+	}
 
-    public Integer getPersonLimitNum() {
-        return personLimitNum;
-    }
+	public Integer getDayLimitNum() {
+		return dayLimitNum;
+	}
 
-    public void setPersonLimitNum(Integer personLimitNum) {
-        this.personLimitNum = personLimitNum;
-    }
+	public void setDayLimitNum(Integer dayLimitNum) {
+		this.dayLimitNum = dayLimitNum;
+	}
 
-    public Integer getEffectDay() {
-        return effectDay;
-    }
+	public Integer getPersonLimitNum() {
+		return personLimitNum;
+	}
 
-    public void setEffectDay(Integer effectDay) {
-        this.effectDay = effectDay;
-    }
+	public void setPersonLimitNum(Integer personLimitNum) {
+		this.personLimitNum = personLimitNum;
+	}
 
-    public String getOnlinePay() {
-        return onlinePay;
-    }
+	public Integer getDayRecvLimitNum() {
+		return dayRecvLimitNum;
+	}
 
-    public void setOnlinePay(String onlinePay) {
-        this.onlinePay = onlinePay == null ? null : onlinePay.trim();
-    }
+	public void setDayRecvLimitNum(Integer dayRecvLimitNum) {
+		this.dayRecvLimitNum = dayRecvLimitNum;
+	}
 
-    public Integer getEffectAfterRecvDay() {
-        return effectAfterRecvDay;
-    }
+	public Integer getEffectDay() {
+		return effectDay;
+	}
 
-    public void setEffectAfterRecvDay(Integer effectAfterRecvDay) {
-        this.effectAfterRecvDay = effectAfterRecvDay;
-    }
+	public void setEffectDay(Integer effectDay) {
+		this.effectDay = effectDay;
+	}
 
-    public String getCanUseTime() {
-        return canUseTime;
-    }
+	public Bool getOnlinePay() {
+		return onlinePay;
+	}
 
-    public void setCanUseTime(String canUseTime) {
-        this.canUseTime = canUseTime == null ? null : canUseTime.trim();
-    }
+	public void setOnlinePay(Bool onlinePay) {
+		this.onlinePay = onlinePay;
+	}
 
-    public String getRemark() {
-        return remark;
-    }
+	public Integer getEffectAfterRecvDay() {
+		return effectAfterRecvDay;
+	}
 
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
+	public void setEffectAfterRecvDay(Integer effectAfterRecvDay) {
+		this.effectAfterRecvDay = effectAfterRecvDay;
+	}
 
-    public CommonStatus getStatus() {
-        return status;
-    }
+	public Bool getUseInHoliday() {
+		return useInHoliday;
+	}
 
-    public void setStatus(CommonStatus status) {
-        this.status = status;
-    }
+	public void setUseInHoliday(Bool useInHoliday) {
+		this.useInHoliday = useInHoliday;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public String getCanUseTime() {
+		return canUseTime;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setCanUseTime(String canUseTime) {
+		this.canUseTime = canUseTime == null ? null : canUseTime.trim();
+	}
 
-    public Date getLastUptime() {
-        return lastUptime;
-    }
+	public String getRemark() {
+		return remark;
+	}
 
-    public void setLastUptime(Date lastUptime) {
-        this.lastUptime = lastUptime;
-    }
+	public void setRemark(String remark) {
+		this.remark = remark == null ? null : remark.trim();
+	}
 
-    @Override
-    public Integer getPK() {
-        return id;
-    }
+	public CommonStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(CommonStatus status) {
+		this.status = status;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getLastUptime() {
+		return lastUptime;
+	}
+
+	public void setLastUptime(Date lastUptime) {
+		this.lastUptime = lastUptime;
+	}
+
+	@Override
+	public Integer getPK() {
+		return id;
+	}
 }

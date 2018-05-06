@@ -35,7 +35,7 @@ public class WalletController {
 		Wallet wallet = walletService.findById(ThreadUtil.getUidInt());
 
 		UserCouponNum discountCouponNum = userCouponNumService.loadByUidAndCouponType(ThreadUtil.getUidInt(),
-				CouponType.Discount);
+				CouponType.Diyong);
 		UserCouponNum cashCouponNum = userCouponNumService.loadByUidAndCouponType(ThreadUtil.getUidInt(),
 				CouponType.Cash);
 
