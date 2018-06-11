@@ -122,6 +122,7 @@ create table shop_coupon(
   `day_limit_num` int default 1 comment '每天限领张数。默认为1张',
   `person_limit_num` int default 1 comment '每人最多可持有张数。默认为1张',
   `day_recv_limit_num` int default 0 comment '每天最多发放张数，0或不填代表不限张数',
+  `recv_after_used` enum('Y', 'N') default 'Y' comment '券使用后才可再领取。默认为Y，即是',
   `effect_day` int default 30 comment '优惠券领取后多少天内有效。默认为30天',
   `online_pay` enum('Y', 'N') default 'Y' comment '是否支持在线支付。默认为Y，即支持',
   `effect_after_recv_day` int default 2 comment '优惠券领取后第几天可使用。默认为第2天',

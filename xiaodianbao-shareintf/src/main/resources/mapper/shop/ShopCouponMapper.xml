@@ -13,6 +13,7 @@
     <result column="day_limit_num" property="dayLimitNum" jdbcType="INTEGER" />
     <result column="person_limit_num" property="personLimitNum" jdbcType="INTEGER" />
     <result column="day_recv_limit_num" property="dayRecvLimitNum" jdbcType="INTEGER" />
+    <result column="recv_after_used" property="recvAfterUsed" jdbcType="CHAR" />
     <result column="effect_day" property="effectDay" jdbcType="INTEGER" />
     <result column="online_pay" property="onlinePay" jdbcType="CHAR" />
     <result column="effect_after_recv_day" property="effectAfterRecvDay" jdbcType="INTEGER" />
@@ -25,8 +26,9 @@
   </resultMap>
   <sql id="BaseColumnList" >
     id, wx_uid, shop_id, coupon_type, tmpl_file_name, discount_type, discount, min_amount, 
-    day_limit_num, person_limit_num, day_recv_limit_num, effect_day, online_pay, effect_after_recv_day, 
-    use_in_holiday, can_use_time, remark, status, create_time, last_uptime
+    day_limit_num, person_limit_num, day_recv_limit_num, recv_after_used, effect_day, 
+    online_pay, effect_after_recv_day, use_in_holiday, can_use_time, remark, status, 
+    create_time, last_uptime
   </sql>
   <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -42,17 +44,19 @@
     insert into shop_coupon (id, wx_uid, shop_id, 
       coupon_type, tmpl_file_name, discount_type, 
       discount, min_amount, day_limit_num, 
-      person_limit_num, day_recv_limit_num, effect_day, 
-      online_pay, effect_after_recv_day, use_in_holiday, 
-      can_use_time, remark, status, 
-      create_time, last_uptime)
+      person_limit_num, day_recv_limit_num, recv_after_used, 
+      effect_day, online_pay, effect_after_recv_day, 
+      use_in_holiday, can_use_time, remark, 
+      status, create_time, last_uptime
+      )
     values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
       #{couponType,jdbcType=CHAR}, #{tmplFileName,jdbcType=VARCHAR}, #{discountType,jdbcType=CHAR}, 
       #{discount,jdbcType=DOUBLE}, #{minAmount,jdbcType=DOUBLE}, #{dayLimitNum,jdbcType=INTEGER}, 
-      #{personLimitNum,jdbcType=INTEGER}, #{dayRecvLimitNum,jdbcType=INTEGER}, #{effectDay,jdbcType=INTEGER}, 
-      #{onlinePay,jdbcType=CHAR}, #{effectAfterRecvDay,jdbcType=INTEGER}, #{useInHoliday,jdbcType=CHAR}, 
-      #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
+      #{personLimitNum,jdbcType=INTEGER}, #{dayRecvLimitNum,jdbcType=INTEGER}, #{recvAfterUsed,jdbcType=CHAR}, 
+      #{effectDay,jdbcType=INTEGER}, #{onlinePay,jdbcType=CHAR}, #{effectAfterRecvDay,jdbcType=INTEGER}, 
+      #{useInHoliday,jdbcType=CHAR}, #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.shop.entity.ShopCoupon" >
     update shop_coupon
@@ -86,6 +90,9 @@
       </if>
       <if test="dayRecvLimitNum != null" >
         day_recv_limit_num = #{dayRecvLimitNum,jdbcType=INTEGER},
+      </if>
+      <if test="recvAfterUsed != null" >
+        recv_after_used = #{recvAfterUsed,jdbcType=CHAR},
       </if>
       <if test="effectDay != null" >
         effect_day = #{effectDay,jdbcType=INTEGER},
@@ -121,24 +128,26 @@
     insert into shop_coupon (id, wx_uid, shop_id, 
       coupon_type, tmpl_file_name, discount_type, 
       discount, min_amount, day_limit_num, 
-      person_limit_num, day_recv_limit_num, effect_day, 
-      online_pay, effect_after_recv_day, use_in_holiday, 
-      can_use_time, remark, status, 
-      create_time, last_uptime)
+      person_limit_num, day_recv_limit_num, recv_after_used, 
+      effect_day, online_pay, effect_after_recv_day, 
+      use_in_holiday, can_use_time, remark, 
+      status, create_time, last_uptime
+      )
     values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
       #{couponType,jdbcType=CHAR}, #{tmplFileName,jdbcType=VARCHAR}, #{discountType,jdbcType=CHAR}, 
       #{discount,jdbcType=DOUBLE}, #{minAmount,jdbcType=DOUBLE}, #{dayLimitNum,jdbcType=INTEGER}, 
-      #{personLimitNum,jdbcType=INTEGER}, #{dayRecvLimitNum,jdbcType=INTEGER}, #{effectDay,jdbcType=INTEGER}, 
-      #{onlinePay,jdbcType=CHAR}, #{effectAfterRecvDay,jdbcType=INTEGER}, #{useInHoliday,jdbcType=CHAR}, 
-      #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
+      #{personLimitNum,jdbcType=INTEGER}, #{dayRecvLimitNum,jdbcType=INTEGER}, #{recvAfterUsed,jdbcType=CHAR}, 
+      #{effectDay,jdbcType=INTEGER}, #{onlinePay,jdbcType=CHAR}, #{effectAfterRecvDay,jdbcType=INTEGER}, 
+      #{useInHoliday,jdbcType=CHAR}, #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertBatch" parameterType="java.util.List" >
     insert into shop_coupon
-		(id,wx_uid,shop_id,coupon_type,tmpl_file_name,discount_type,discount,min_amount,day_limit_num,person_limit_num,day_recv_limit_num,effect_day,online_pay,effect_after_recv_day,use_in_holiday,can_use_time,remark,status,create_time,last_uptime)
+		(id,wx_uid,shop_id,coupon_type,tmpl_file_name,discount_type,discount,min_amount,day_limit_num,person_limit_num,day_recv_limit_num,recv_after_used,effect_day,online_pay,effect_after_recv_day,use_in_holiday,can_use_time,remark,status,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.id,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.shopId,jdbcType=INTEGER},#{item.couponType,jdbcType=CHAR},#{item.tmplFileName,jdbcType=VARCHAR},#{item.discountType,jdbcType=CHAR},#{item.discount,jdbcType=DOUBLE},#{item.minAmount,jdbcType=DOUBLE},#{item.dayLimitNum,jdbcType=INTEGER},#{item.personLimitNum,jdbcType=INTEGER},#{item.dayRecvLimitNum,jdbcType=INTEGER},#{item.effectDay,jdbcType=INTEGER},#{item.onlinePay,jdbcType=CHAR},#{item.effectAfterRecvDay,jdbcType=INTEGER},#{item.useInHoliday,jdbcType=CHAR},#{item.canUseTime,jdbcType=VARCHAR},#{item.remark,jdbcType=VARCHAR},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.id,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.shopId,jdbcType=INTEGER},#{item.couponType,jdbcType=CHAR},#{item.tmplFileName,jdbcType=VARCHAR},#{item.discountType,jdbcType=CHAR},#{item.discount,jdbcType=DOUBLE},#{item.minAmount,jdbcType=DOUBLE},#{item.dayLimitNum,jdbcType=INTEGER},#{item.personLimitNum,jdbcType=INTEGER},#{item.dayRecvLimitNum,jdbcType=INTEGER},#{item.recvAfterUsed,jdbcType=CHAR},#{item.effectDay,jdbcType=INTEGER},#{item.onlinePay,jdbcType=CHAR},#{item.effectAfterRecvDay,jdbcType=INTEGER},#{item.useInHoliday,jdbcType=CHAR},#{item.canUseTime,jdbcType=VARCHAR},#{item.remark,jdbcType=VARCHAR},#{item.status,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -197,6 +206,9 @@
 			</if>
 			<if test="dayRecvLimitNum != null and dayRecvLimitNum > 0" >
 				and day_recv_limit_num = #{dayRecvLimitNum,jdbcType=INTEGER}
+			</if>
+			<if test="recvAfterUsed != null" >
+				and recv_after_used = #{recvAfterUsed,jdbcType=CHAR}
 			</if>
 			<if test="effectDay != null and effectDay > 0" >
 				and effect_day = #{effectDay,jdbcType=INTEGER}

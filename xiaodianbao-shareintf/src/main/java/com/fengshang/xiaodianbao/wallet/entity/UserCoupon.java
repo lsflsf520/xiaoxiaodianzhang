@@ -1,184 +1,217 @@
 package com.fengshang.xiaodianbao.wallet.entity;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import com.fengshang.xiaodianbao.constant.CouponState;
 import com.fengshang.xiaodianbao.constant.CouponType;
 import com.fengshang.xiaodianbao.constant.DiscountType;
+import com.xyz.tools.common.constant.Bool;
+import com.xyz.tools.common.utils.ChineseWorkHolidayUtil;
 import com.xyz.tools.db.bean.BaseEntity;
-import java.util.Date;
 
 public class UserCoupon extends BaseEntity<Integer> {
-    private Integer id;
+	private Integer id;
 
-    private Integer wxUid;
+	private Integer wxUid;
 
-    private Integer shopId;
+	private Integer shopId;
 
-    private String srcCode;
+	private String srcCode;
 
-    private CouponType couponType;
+	private CouponType couponType;
 
-    private String tmplFileName;
+	private String tmplFileName;
 
-    private DiscountType discountType;
+	private DiscountType discountType;
 
-    private Double discount;
+	private Double discount;
 
-    private Double minAmount;
+	private Double minAmount;
 
-    private String onlinePay;
+	private Bool onlinePay;
 
-    private Date uneffectTime;
+	private Bool useInHoliday;
 
-    private Date effectTime;
+	private Date uneffectTime;
 
-    private String canUseTime;
+	private Date effectTime;
 
-    private String remark;
+	private String canUseTime;
 
-    private CouponState couponState;
+	private String remark;
 
-    private Date createTime;
+	private CouponState couponState;
 
-    private Date lastUptime;
+	private Date createTime;
 
-    public Integer getId() {
-        return id;
-    }
+	private Date lastUptime;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getWxUid() {
-        return wxUid;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setWxUid(Integer wxUid) {
-        this.wxUid = wxUid;
-    }
+	public Integer getWxUid() {
+		return wxUid;
+	}
 
-    public Integer getShopId() {
-        return shopId;
-    }
+	public void setWxUid(Integer wxUid) {
+		this.wxUid = wxUid;
+	}
 
-    public void setShopId(Integer shopId) {
-        this.shopId = shopId;
-    }
+	public Integer getShopId() {
+		return shopId;
+	}
 
-    public String getSrcCode() {
-        return srcCode;
-    }
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
 
-    public void setSrcCode(String srcCode) {
-        this.srcCode = srcCode == null ? null : srcCode.trim();
-    }
+	public String getSrcCode() {
+		return srcCode;
+	}
 
-    public CouponType getCouponType() {
-        return couponType;
-    }
+	public void setSrcCode(String srcCode) {
+		this.srcCode = srcCode == null ? null : srcCode.trim();
+	}
 
-    public void setCouponType(CouponType couponType) {
-        this.couponType = couponType;
-    }
+	public CouponType getCouponType() {
+		return couponType;
+	}
 
-    public String getTmplFileName() {
-        return tmplFileName;
-    }
+	public void setCouponType(CouponType couponType) {
+		this.couponType = couponType;
+	}
 
-    public void setTmplFileName(String tmplFileName) {
-        this.tmplFileName = tmplFileName == null ? null : tmplFileName.trim();
-    }
+	public String getTmplFileName() {
+		return tmplFileName;
+	}
 
-    public DiscountType getDiscountType() {
-        return discountType;
-    }
+	public void setTmplFileName(String tmplFileName) {
+		this.tmplFileName = tmplFileName == null ? null : tmplFileName.trim();
+	}
 
-    public void setDiscountType(DiscountType discountType) {
-        this.discountType = discountType;
-    }
+	public DiscountType getDiscountType() {
+		return discountType;
+	}
 
-    public Double getDiscount() {
-        return discount;
-    }
+	public void setDiscountType(DiscountType discountType) {
+		this.discountType = discountType;
+	}
 
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
+	public Double getDiscount() {
+		return discount;
+	}
 
-    public Double getMinAmount() {
-        return minAmount;
-    }
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
 
-    public void setMinAmount(Double minAmount) {
-        this.minAmount = minAmount;
-    }
+	public Double getMinAmount() {
+		return minAmount;
+	}
 
-    public String getOnlinePay() {
-        return onlinePay;
-    }
+	public void setMinAmount(Double minAmount) {
+		this.minAmount = minAmount;
+	}
 
-    public void setOnlinePay(String onlinePay) {
-        this.onlinePay = onlinePay == null ? null : onlinePay.trim();
-    }
+	public Bool getOnlinePay() {
+		return onlinePay;
+	}
 
-    public Date getUneffectTime() {
-        return uneffectTime;
-    }
+	public void setOnlinePay(Bool onlinePay) {
+		this.onlinePay = onlinePay;
+	}
 
-    public void setUneffectTime(Date uneffectTime) {
-        this.uneffectTime = uneffectTime;
-    }
+	public Bool getUseInHoliday() {
+		return useInHoliday;
+	}
 
-    public Date getEffectTime() {
-        return effectTime;
-    }
+	public void setUseInHoliday(Bool useInHoliday) {
+		this.useInHoliday = useInHoliday;
+	}
 
-    public void setEffectTime(Date effectTime) {
-        this.effectTime = effectTime;
-    }
+	public Date getUneffectTime() {
+		return uneffectTime;
+	}
 
-    public String getCanUseTime() {
-        return canUseTime;
-    }
+	public void setUneffectTime(Date uneffectTime) {
+		this.uneffectTime = uneffectTime;
+	}
 
-    public void setCanUseTime(String canUseTime) {
-        this.canUseTime = canUseTime == null ? null : canUseTime.trim();
-    }
+	public Date getEffectTime() {
+		return effectTime;
+	}
 
-    public String getRemark() {
-        return remark;
-    }
+	public void setEffectTime(Date effectTime) {
+		this.effectTime = effectTime;
+	}
 
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
+	public String getCanUseTime() {
+		return canUseTime;
+	}
 
-    public CouponState getCouponState() {
-        return couponState;
-    }
+	public void setCanUseTime(String canUseTime) {
+		this.canUseTime = canUseTime == null ? null : canUseTime.trim();
+	}
 
-    public void setCouponState(CouponState couponState) {
-        this.couponState = couponState;
-    }
+	public String getRemark() {
+		return remark;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setRemark(String remark) {
+		this.remark = remark == null ? null : remark.trim();
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public CouponState getCouponState() {
+		return couponState;
+	}
 
-    public Date getLastUptime() {
-        return lastUptime;
-    }
+	public void setCouponState(CouponState couponState) {
+		this.couponState = couponState;
+	}
 
-    public void setLastUptime(Date lastUptime) {
-        this.lastUptime = lastUptime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    @Override
-    public Integer getPK() {
-        return id;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getLastUptime() {
+		return lastUptime;
+	}
+
+	public void setLastUptime(Date lastUptime) {
+		this.lastUptime = lastUptime;
+	}
+
+	/**
+	 * 
+	 * @return 返回优惠券是否处于可用状态
+	 */
+	public boolean isAvail() {
+		return CouponState.RECVD.equals(this.getCouponState()) && this.getUneffectTime() != null
+				&& this.getUneffectTime().getTime() >= System.currentTimeMillis();
+	}
+
+	/**
+	 * 
+	 * @return 返回优惠券在当前时间，当前可用订单消费金额条件下是否可用
+	 */
+	public boolean canUse(BigDecimal availAmount) {
+
+		return availAmount.compareTo(new BigDecimal(this.getMinAmount())) >= 0 && isAvail()
+				&& (Bool.Y.equals(getUseInHoliday()) || !ChineseWorkHolidayUtil.isHoliday(new Date()));
+	}
+
+	@Override
+	public Integer getPK() {
+		return id;
+	}
 }

@@ -31,6 +31,8 @@ public class ShopCoupon extends BaseEntity<Integer> {
 
 	private Integer dayRecvLimitNum;
 
+	private Bool recvAfterUsed;
+
 	private Integer effectDay;
 
 	private Bool onlinePay;
@@ -135,6 +137,14 @@ public class ShopCoupon extends BaseEntity<Integer> {
 
 	public void setDayRecvLimitNum(Integer dayRecvLimitNum) {
 		this.dayRecvLimitNum = dayRecvLimitNum;
+	}
+
+	public Bool getRecvAfterUsed() {
+		return recvAfterUsed;
+	}
+
+	public void setRecvAfterUsed(Bool recvAfterUsed) {
+		this.recvAfterUsed = recvAfterUsed;
 	}
 
 	public Integer getEffectDay() {

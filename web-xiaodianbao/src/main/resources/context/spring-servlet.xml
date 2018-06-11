@@ -14,18 +14,35 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
-    <mvc:annotation-driven>
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.xyz.tools.web.convert.DateConvert" />
+            </set>
+        </property>
+    </bean>
+
+    <mvc:annotation-driven  conversion-service="conversionService">
       <mvc:message-converters register-defaults="true">
         <bean class="org.springframework.http.converter.StringHttpMessageConverter"> 
             <constructor-arg value="UTF-8" />        
         </bean>
-        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-          <property name="supportedMediaTypes">
-           <list>
-              <value>application/json;charset=UTF-8</value>
-           </list>
-          </property>
-        </bean>
+        <bean id="jacksonObjectMapper" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	       <property name="objectMapper">
+	           <bean class="com.xyz.tools.web.convert.CustomDataJsonMapper">
+	           		<property name="serializationInclusion">
+                         <!-- 注入枚举类型 -->
+                         <value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
+                   	</property>
+	           </bean>
+	       </property>
+	       <!-- 避免返回JSON出现下载文件 -->
+	       <property name="supportedMediaTypes">
+	           <list>
+	              <value>application/json;charset=UTF-8</value>
+	           </list>
+	       </property>
+	    </bean>
       </mvc:message-converters>
     </mvc:annotation-driven>
     

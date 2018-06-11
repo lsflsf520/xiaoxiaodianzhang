@@ -62,4 +62,14 @@ public class ShopCouponService extends AbstractBaseService<Integer, ShopCoupon> 
 
 		return this.findByEntity(query, "last_uptime.desc");
 	}
+
+	public List<ShopCoupon> loadByShopId(int shopId) {
+		ShopCoupon query = new ShopCoupon();
+		query.setShopId(shopId);
+		query.setStatus(CommonStatus.NORMAL);
+		query.setOrdseg("last_uptime.desc");
+
+		return this.findTopItems(query, 6);
+	}
+
 }

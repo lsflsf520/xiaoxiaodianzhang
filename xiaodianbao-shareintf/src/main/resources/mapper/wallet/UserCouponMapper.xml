@@ -12,6 +12,7 @@
     <result column="discount" property="discount" jdbcType="DOUBLE" />
     <result column="min_amount" property="minAmount" jdbcType="DOUBLE" />
     <result column="online_pay" property="onlinePay" jdbcType="CHAR" />
+    <result column="use_in_holiday" property="useInHoliday" jdbcType="CHAR" />
     <result column="uneffect_time" property="uneffectTime" jdbcType="TIMESTAMP" />
     <result column="effect_time" property="effectTime" jdbcType="TIMESTAMP" />
     <result column="can_use_time" property="canUseTime" jdbcType="VARCHAR" />
@@ -22,8 +23,8 @@
   </resultMap>
   <sql id="BaseColumnList" >
     id, wx_uid, shop_id, src_code, coupon_type, tmpl_file_name, discount_type, discount, 
-    min_amount, online_pay, uneffect_time, effect_time, can_use_time, remark, coupon_state, 
-    create_time, last_uptime
+    min_amount, online_pay, use_in_holiday, uneffect_time, effect_time, can_use_time, 
+    remark, coupon_state, create_time, last_uptime
   </sql>
   <select id="findByPK" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -39,15 +40,17 @@
     insert into user_coupon (id, wx_uid, shop_id, 
       src_code, coupon_type, tmpl_file_name, 
       discount_type, discount, min_amount, 
-      online_pay, uneffect_time, effect_time, 
-      can_use_time, remark, coupon_state, 
-      create_time, last_uptime)
+      online_pay, use_in_holiday, uneffect_time, 
+      effect_time, can_use_time, remark, 
+      coupon_state, create_time, last_uptime
+      )
     values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
       #{srcCode,jdbcType=VARCHAR}, #{couponType,jdbcType=CHAR}, #{tmplFileName,jdbcType=VARCHAR}, 
       #{discountType,jdbcType=CHAR}, #{discount,jdbcType=DOUBLE}, #{minAmount,jdbcType=DOUBLE}, 
-      #{onlinePay,jdbcType=CHAR}, #{uneffectTime,jdbcType=TIMESTAMP}, #{effectTime,jdbcType=TIMESTAMP}, 
-      #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{couponState,jdbcType=CHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
+      #{onlinePay,jdbcType=CHAR}, #{useInHoliday,jdbcType=CHAR}, #{uneffectTime,jdbcType=TIMESTAMP}, 
+      #{effectTime,jdbcType=TIMESTAMP}, #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{couponState,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <update id="updateByPK" parameterType="com.fengshang.xiaodianbao.wallet.entity.UserCoupon" >
     update user_coupon
@@ -79,6 +82,9 @@
       <if test="onlinePay != null" >
         online_pay = #{onlinePay,jdbcType=CHAR},
       </if>
+      <if test="useInHoliday != null" >
+        use_in_holiday = #{useInHoliday,jdbcType=CHAR},
+      </if>
       <if test="uneffectTime != null" >
         uneffect_time = #{uneffectTime,jdbcType=TIMESTAMP},
       </if>
@@ -107,22 +113,24 @@
     insert into user_coupon (id, wx_uid, shop_id, 
       src_code, coupon_type, tmpl_file_name, 
       discount_type, discount, min_amount, 
-      online_pay, uneffect_time, effect_time, 
-      can_use_time, remark, coupon_state, 
-      create_time, last_uptime)
+      online_pay, use_in_holiday, uneffect_time, 
+      effect_time, can_use_time, remark, 
+      coupon_state, create_time, last_uptime
+      )
     values (#{id,jdbcType=INTEGER}, #{wxUid,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, 
       #{srcCode,jdbcType=VARCHAR}, #{couponType,jdbcType=CHAR}, #{tmplFileName,jdbcType=VARCHAR}, 
       #{discountType,jdbcType=CHAR}, #{discount,jdbcType=DOUBLE}, #{minAmount,jdbcType=DOUBLE}, 
-      #{onlinePay,jdbcType=CHAR}, #{uneffectTime,jdbcType=TIMESTAMP}, #{effectTime,jdbcType=TIMESTAMP}, 
-      #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{couponState,jdbcType=CHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP})
+      #{onlinePay,jdbcType=CHAR}, #{useInHoliday,jdbcType=CHAR}, #{uneffectTime,jdbcType=TIMESTAMP}, 
+      #{effectTime,jdbcType=TIMESTAMP}, #{canUseTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{couponState,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUptime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertBatch" parameterType="java.util.List" >
     insert into user_coupon
-		(id,wx_uid,shop_id,src_code,coupon_type,tmpl_file_name,discount_type,discount,min_amount,online_pay,uneffect_time,effect_time,can_use_time,remark,coupon_state,create_time,last_uptime)
+		(id,wx_uid,shop_id,src_code,coupon_type,tmpl_file_name,discount_type,discount,min_amount,online_pay,use_in_holiday,uneffect_time,effect_time,can_use_time,remark,coupon_state,create_time,last_uptime)
 	values 
 	<foreach collection="list" item="item" separator="," index="index">
-		(#{item.id,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.shopId,jdbcType=INTEGER},#{item.srcCode,jdbcType=VARCHAR},#{item.couponType,jdbcType=CHAR},#{item.tmplFileName,jdbcType=VARCHAR},#{item.discountType,jdbcType=CHAR},#{item.discount,jdbcType=DOUBLE},#{item.minAmount,jdbcType=DOUBLE},#{item.onlinePay,jdbcType=CHAR},#{item.uneffectTime,jdbcType=TIMESTAMP},#{item.effectTime,jdbcType=TIMESTAMP},#{item.canUseTime,jdbcType=VARCHAR},#{item.remark,jdbcType=VARCHAR},#{item.couponState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
+		(#{item.id,jdbcType=INTEGER},#{item.wxUid,jdbcType=INTEGER},#{item.shopId,jdbcType=INTEGER},#{item.srcCode,jdbcType=VARCHAR},#{item.couponType,jdbcType=CHAR},#{item.tmplFileName,jdbcType=VARCHAR},#{item.discountType,jdbcType=CHAR},#{item.discount,jdbcType=DOUBLE},#{item.minAmount,jdbcType=DOUBLE},#{item.onlinePay,jdbcType=CHAR},#{item.useInHoliday,jdbcType=CHAR},#{item.uneffectTime,jdbcType=TIMESTAMP},#{item.effectTime,jdbcType=TIMESTAMP},#{item.canUseTime,jdbcType=VARCHAR},#{item.remark,jdbcType=VARCHAR},#{item.couponState,jdbcType=CHAR},#{item.createTime,jdbcType=TIMESTAMP},#{item.lastUptime,jdbcType=TIMESTAMP})
 	</foreach>
   </insert>
   <delete id="batchDel" >
@@ -176,14 +184,11 @@
 			<if test="discountType != null" >
 				and discount_type = #{discountType,jdbcType=CHAR}
 			</if>
-			<if test="discount != null" >
-				and discount = #{discount,jdbcType=DOUBLE}
-			</if>
-			<if test="minAmount != null" >
-				and min_amount = #{minAmount,jdbcType=DOUBLE}
-			</if>
-			<if test="onlinePay != null and onlinePay != ''" >
+			<if test="onlinePay != null" >
 				and online_pay = #{onlinePay,jdbcType=CHAR}
+			</if>
+			<if test="useInHoliday != null" >
+				and use_in_holiday = #{useInHoliday,jdbcType=CHAR}
 			</if>
 			<if test="canUseTime != null and canUseTime != ''" >
 				and can_use_time = #{canUseTime,jdbcType=VARCHAR}
@@ -195,8 +200,11 @@
 				and coupon_state = #{couponState,jdbcType=CHAR}
 			</if>
 			<!--<if test="queryParam != null">
-				<if test="queryParam.startDate != null and queryParam.startDate != '' and queryParam.endDate != null and queryParam.endDate != ''">
-					and create_time between #{queryParam.startDate, jdbcType=VARCHAR} and #{queryParam.endDate, jdbcType=VARCHAR}
+				<if test="queryParam.startDate != null and queryParam.startDate != '' ">
+					and create_time &gt;= #{queryParam.startDate, jdbcType=VARCHAR} 
+				</if>
+				<if test="queryParam.endDate != null and queryParam.endDate != ''">
+					and create_time &lt; #{queryParam.endDate, jdbcType=VARCHAR}
 				</if>
 				<if test="queryParam.keyword != null and queryParam.keyword != ''">
 					and (name like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') or other_col like concat('%', #{queryParam.keyword, jdbcType=VARCHAR}, '%') )

@@ -19,6 +19,7 @@ import com.fengshang.xiaodianbao.uc.entity.WxUserExtra;
 import com.fengshang.xiaodianbao.uc.service.WxUserExtraService;
 import com.fengshang.xiaodianbao.uc.service.WxUserService;
 import com.xyz.tools.common.bean.ResultModel;
+import com.xyz.tools.common.constant.Bool;
 import com.xyz.tools.common.constant.CheckState;
 import com.xyz.tools.common.constant.Sex;
 import com.xyz.tools.common.utils.LogUtils;
@@ -35,7 +36,7 @@ import me.chanjar.weixin.common.exception.WxErrorException;
 @RequestMapping("uc/wxuser")
 public class WxUserController {
 
-	private final static String WX_SESSION_KEY = "sessionKey";
+	// private final static String WX_SESSION_KEY = "sessionKey";
 
 	@Resource
 	private WxUserService wxUserService;
@@ -117,5 +118,12 @@ public class WxUserController {
 
 		return ResultModel.buildMapResultModel().put("extra", userExtra).put("provinces", provinces).put("shopState",
 				shopState);
+	}
+
+	@RequestMapping("msgSwitch")
+	@ResponseBody
+	public ResultModel msgSwitch(String msgType, Bool open) {
+		boolean result = wxUserExtraService.updateMsgSwitch(ThreadUtil.getUidInt(), msgType, open);
+		return new ResultModel(result);
 	}
 }
